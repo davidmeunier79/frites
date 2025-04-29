@@ -1,8 +1,0 @@
-numpy
-scipy
-mne==1.5.0
-joblib
-xarray
-netCDF4
-h5netcdf
-scikit-learn

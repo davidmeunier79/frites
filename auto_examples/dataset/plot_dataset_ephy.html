@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Build an electrophysiological dataset &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/dataset/plot_dataset_ephy';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Define an electrophysiological dataset using Xarray" href="plot_dataset_xarray.html" />
+    <link rel="prev" title="Define an electrophysiological dataset using MNE-Python structures" href="plot_dataset_mne.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_dfc_estimator.html">Estimate the Dynamic Functional Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_stim_spec_network.html">Statistical analysis of a stimulus-specific network</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Multi-subjects dataset</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_dataset_mne.html">Define an electrophysiological dataset using MNE-Python structures</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Build an electrophysiological dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_dataset_xarray.html">Define an electrophysiological dataset using Xarray</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mi/index.html">Group-level statistics on measures of information</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_ccd.html">MI between two continuous variables conditioned by a discret one</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cd.html">MI between a continuous and a discret variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cc.html">MI between two continuous variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_time_frequency.html">Compute MI across time and frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_combine.html">Investigate relation of order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_conjunction.html">Compute a conjunction analysis on mutual-information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_contact_level.html">Mutual-information at the contact level</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../estimators/index.html">Information-based estimators</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_resample.html">Trial-resampling: correcting for unbalanced designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_custom.html">Defining a custom estimator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_comparison.html">Estimator comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conn/index.html">Connectivity and Information Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_fit.html">FIT: Feature specific information transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_pid.html">PID: Decomposing the information carried by pairs of brain regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_dfc.html">Estimate dynamic functional connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ii.html">Estimate interaction information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_conn.html">Estimate comodulations between brain areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ccf.html">Lag estimation between delayed times-series using the cross-correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_covgc.html">Estimate the covariance-based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../armodel/index.html">Autoregressive model</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_pairwise.html">AR : pairwise illustration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_instantaneous.html">AR : simulate common driving input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_condcovgc.html">AR : conditional covariance based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utility</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/plot_time_windows.html">Define temporal windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../statistics/index.html">Statistics</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_ffx.html">Compare within-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_rfx.html">Compare between-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_ci_cc.html">Estimate the empirical confidence interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulations/index.html">Simulations</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_generate_random_data.html">Generate random electrophysiological data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_ground_truth.html">Generate spatio-temporal ground-truths</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../performance/index.html">Performance</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../performance/plot_vector_vs_tensor.html">Comparison between tensor and vector based computations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../xarray/index.html">Xarray</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../xarray/plot_xr_export.html">Xarray : Saving the results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xarray/plot_xr_quick_tour.html">Xarray : Quick tour</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Multi-subjects dataset</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Build an...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-dataset-plot-dataset-ephy-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="build-an-electrophysiological-dataset">
+<span id="sphx-glr-auto-examples-dataset-plot-dataset-ephy-py"></span><h1>Build an electrophysiological dataset<a class="headerlink" href="#build-an-electrophysiological-dataset" title="Permalink to this heading">#</a></h1>
+<p>In Frites, a dataset is a structure for grouping the electrophysiological data
+(e.g MEG / EEG / Intracranial) coming from multiple subjects. In addition,
+some basic operations can also be performed (like slicing, smoothing etc.). In
+this example we illutrate how to define a dataset using NumPy arrays.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">frites.dataset</span><span class="w"> </span><span class="kn">import</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class"><span class="n">DatasetEphy</span></a>
+<span class="kn">from</span><span class="w"> </span><span class="nn">frites</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_mpl_style</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">set_mpl_style</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="create-artificial-data">
+<h2>Create artificial data<a class="headerlink" href="#create-artificial-data" title="Permalink to this heading">#</a></h2>
+<p>We start by creating some random data for several subjects. To do that, each
+subject is going have a 3 dimensional array of shape
+(n_epochs, n_channels, n_times). Then, all of the arrays are grouped together
+in a list of length (n_subjects,)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">n_subjects</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+    <span class="c1"># generate single subject data</span>
+    <span class="n">x_suj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
+    <span class="c1"># generate some random channel names</span>
+    <span class="n">ch_suj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;ch_</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">)])</span>
+    <span class="c1"># concatenate in a list</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_suj</span><span class="p">)</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_suj</span><span class="p">)</span>
+<span class="c1"># finally lets create a time vector</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span> <span class="o">/</span> <span class="n">sf</span>
+</pre></div>
+</div>
+</section>
+<section id="create-the-dataset">
+<h2>Create the dataset<a class="headerlink" href="#create-the-dataset" title="Permalink to this heading">#</a></h2>
+<p>The creation of the dataset is performed using the class
+<a class="reference internal" href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy"><code class="xref py py-class docutils literal notranslate"><span class="pre">frites.dataset.DatasetEphy</span></code></a></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a> <span class="o">=</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class"><span class="n">DatasetEphy</span></a><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">roi</span><span class="o">=</span><span class="n">ch</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.times" title="frites.dataset.DatasetEphy.times" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">times</span></a><span class="p">,</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.x" title="frites.dataset.DatasetEphy.x" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">x</span></a><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Times&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Electrophysiological data of the channel of the first subject&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_dataset_ephy_001.png" srcset="../../_images/sphx_glr_plot_dataset_ephy_001.png" alt="Electrophysiological data of the channel of the first subject" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;subject_0&#39; (trials: 10, roi: 5, times: 1000)&gt;
+array([[[0.53525707, 0.90404425, 0.50239657, ..., 0.93194298,
+         0.89350775, 0.11324662],
+        [0.73160793, 0.29004464, 0.80680547, ..., 0.88825555,
+         0.15057972, 0.58812203],
+        [0.75361481, 0.10592288, 0.04941424, ..., 0.81163535,
+         0.74603077, 0.67833738],
+        [0.45415712, 0.86505071, 0.04861214, ..., 0.2745108 ,
+         0.52077885, 0.50232041],
+        [0.77669551, 0.94562337, 0.46314071, ..., 0.28179303,
+         0.66650258, 0.49105171]],
+
+       [[0.19116441, 0.88396212, 0.02326298, ..., 0.60838277,
+         0.80872933, 0.83793753],
+        [0.60574603, 0.08176632, 0.07688607, ..., 0.03591677,
+         0.18017182, 0.90936556],
+        [0.88436132, 0.81578414, 0.71476586, ..., 0.09606063,
+         0.51842667, 0.3543304 ],
+        [0.36606606, 0.22109795, 0.84747532, ..., 0.01686568,
+         0.85415056, 0.52684837],
+        [0.30038095, 0.88395206, 0.34411368, ..., 0.62978376,
+...
+         0.1422571 , 0.15298784],
+        [0.3772165 , 0.32078659, 0.0231663 , ..., 0.28225945,
+         0.94399632, 0.8281066 ],
+        [0.86911096, 0.98701422, 0.51447722, ..., 0.35207983,
+         0.47159098, 0.18437271],
+        [0.27933554, 0.30301497, 0.74777828, ..., 0.37385757,
+         0.32007632, 0.78155585],
+        [0.96162788, 0.10924056, 0.46835825, ..., 0.24563268,
+         0.52545235, 0.53250025]],
+
+       [[0.06952844, 0.05756135, 0.86240301, ..., 0.92844066,
+         0.51202   , 0.6265961 ],
+        [0.17265854, 0.02639789, 0.87635178, ..., 0.09962254,
+         0.78924694, 0.08159976],
+        [0.95536759, 0.63370801, 0.77252472, ..., 0.0157887 ,
+         0.72192841, 0.96037895],
+        [0.0286734 , 0.90740663, 0.2855858 , ..., 0.78296645,
+         0.63088938, 0.45277063],
+        [0.62271406, 0.32320557, 0.85976955, ..., 0.58101405,
+         0.23693209, 0.0462242 ]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 1.947 1.949 1.951
+    subject  (trials) int64 0 0 0 0 0 0 0 0 0 0
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_1&#39; (trials: 10, roi: 5, times: 1000)&gt;
+array([[[0.6226517 , 0.82421794, 0.28428344, ..., 0.65719648,
+         0.41038518, 0.21414399],
+        [0.55713887, 0.28479517, 0.4313195 , ..., 0.42556767,
+         0.20456613, 0.06760491],
+        [0.6644721 , 0.4040809 , 0.42382495, ..., 0.39978878,
+         0.7447437 , 0.96199139],
+        [0.42449838, 0.59314358, 0.27827526, ..., 0.21949789,
+         0.37932471, 0.12583498],
+        [0.341375  , 0.45898639, 0.99978496, ..., 0.90337754,
+         0.88765144, 0.79509819]],
+
+       [[0.13507748, 0.42215434, 0.79111004, ..., 0.89629261,
+         0.53969568, 0.83165243],
+        [0.22167036, 0.86723811, 0.43822929, ..., 0.64621745,
+         0.42268925, 0.28155454],
+        [0.52131344, 0.42065763, 0.89394277, ..., 0.79553357,
+         0.33453149, 0.10831612],
+        [0.49636419, 0.0148667 , 0.30748066, ..., 0.65062743,
+         0.06808383, 0.57450253],
+        [0.60556715, 0.91077433, 0.80758123, ..., 0.50320463,
+...
+         0.91438003, 0.40562198],
+        [0.07295684, 0.21980733, 0.69708621, ..., 0.94486292,
+         0.39238645, 0.95920698],
+        [0.43313229, 0.7301843 , 0.15804005, ..., 0.59332112,
+         0.26237171, 0.31039835],
+        [0.07708621, 0.81475846, 0.60230857, ..., 0.52396698,
+         0.61981513, 0.61128555],
+        [0.60423346, 0.16303558, 0.23544376, ..., 0.05363134,
+         0.87618747, 0.44162994]],
+
+       [[0.69180697, 0.91569978, 0.46260435, ..., 0.24172837,
+         0.01680803, 0.9655565 ],
+        [0.323027  , 0.95864388, 0.84541827, ..., 0.87812543,
+         0.105274  , 0.21825455],
+        [0.31343561, 0.58720458, 0.997357  , ..., 0.03536821,
+         0.86811813, 0.02784481],
+        [0.99651345, 0.92535954, 0.85922872, ..., 0.48237778,
+         0.13342263, 0.62859324],
+        [0.67284337, 0.9459099 , 0.13853828, ..., 0.21462449,
+         0.29577661, 0.84250419]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 1.947 1.949 1.951
+    subject  (trials) int64 1 1 1 1 1 1 1 1 1 1
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_2&#39; (trials: 10, roi: 5, times: 1000)&gt;
+array([[[0.21776986, 0.58724972, 0.9876133 , ..., 0.11737878,
+         0.90307071, 0.97904516],
+        [0.95642065, 0.8968389 , 0.52146609, ..., 0.43771421,
+         0.48023904, 0.87842861],
+        [0.78758502, 0.72026982, 0.15289461, ..., 0.03275316,
+         0.57316192, 0.90106986],
+        [0.39676152, 0.6682967 , 0.17773763, ..., 0.29322536,
+         0.00461906, 0.86574002],
+        [0.69342261, 0.57497745, 0.7496044 , ..., 0.57906384,
+         0.67349924, 0.63558372]],
+
+       [[0.04403379, 0.36062995, 0.71338395, ..., 0.15883801,
+         0.48271453, 0.91753837],
+        [0.19486562, 0.55920335, 0.24154524, ..., 0.7598431 ,
+         0.09594817, 0.38924385],
+        [0.90151681, 0.68572495, 0.32216237, ..., 0.50552581,
+         0.18051792, 0.65497264],
+        [0.48369291, 0.47526173, 0.49059817, ..., 0.92782791,
+         0.61319985, 0.61561896],
+        [0.14988357, 0.78556549, 0.14568252, ..., 0.7480263 ,
+...
+         0.73924162, 0.15277334],
+        [0.49771084, 0.26201628, 0.53141813, ..., 0.82417916,
+         0.59715007, 0.22299349],
+        [0.71821249, 0.53824605, 0.12980142, ..., 0.87982573,
+         0.41649956, 0.58376354],
+        [0.46739623, 0.50333786, 0.6603223 , ..., 0.38221256,
+         0.84739776, 0.5394097 ],
+        [0.66937494, 0.61731263, 0.47059485, ..., 0.77222142,
+         0.68952733, 0.38284233]],
+
+       [[0.19843802, 0.74518732, 0.11686817, ..., 0.80516883,
+         0.29791792, 0.88384893],
+        [0.69440321, 0.26931728, 0.10386718, ..., 0.16586781,
+         0.62735346, 0.3133154 ],
+        [0.71662727, 0.80711422, 0.43018423, ..., 0.90505901,
+         0.67294766, 0.25427828],
+        [0.93188277, 0.67638396, 0.66752566, ..., 0.86257219,
+         0.78585522, 0.86425687],
+        [0.26993482, 0.42351381, 0.63561855, ..., 0.50272661,
+         0.68693019, 0.1843027 ]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 1.947 1.949 1.951
+    subject  (trials) int64 2 2 2 2 2 2 2 2 2 2
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_3&#39; (trials: 10, roi: 5, times: 1000)&gt;
+array([[[0.27484089, 0.11722118, 0.73666012, ..., 0.12442249,
+         0.70340785, 0.21597358],
+        [0.66821144, 0.46271755, 0.99138652, ..., 0.76707329,
+         0.03878764, 0.09405087],
+        [0.44655442, 0.99634388, 0.08349022, ..., 0.98021804,
+         0.4910746 , 0.84922585],
+        [0.66522228, 0.75708785, 0.61977595, ..., 0.68131989,
+         0.33421452, 0.35425793],
+        [0.66572644, 0.42937864, 0.80495722, ..., 0.31955936,
+         0.27662649, 0.79164331]],
+
+       [[0.2448979 , 0.23391695, 0.19222137, ..., 0.60631182,
+         0.04468354, 0.31005514],
+        [0.57432932, 0.79702601, 0.20548555, ..., 0.40532524,
+         0.43846232, 0.76783515],
+        [0.19199654, 0.61491712, 0.11992644, ..., 0.78086133,
+         0.35170584, 0.06596371],
+        [0.45435686, 0.42827149, 0.75531823, ..., 0.57123004,
+         0.88458596, 0.14109678],
+        [0.89127385, 0.23474509, 0.93650058, ..., 0.27851699,
+...
+         0.21312804, 0.39678959],
+        [0.0338472 , 0.91886871, 0.43112903, ..., 0.52340546,
+         0.73548903, 0.98981321],
+        [0.68084315, 0.32578048, 0.00423282, ..., 0.71746841,
+         0.36746123, 0.4098826 ],
+        [0.85447069, 0.99881163, 0.68174975, ..., 0.00506278,
+         0.876055  , 0.27475058],
+        [0.4329837 , 0.54200339, 0.51328365, ..., 0.21264951,
+         0.74785176, 0.78251502]],
+
+       [[0.01027822, 0.97447718, 0.92127886, ..., 0.88037244,
+         0.81299361, 0.24406167],
+        [0.91684703, 0.92134191, 0.17187039, ..., 0.7337439 ,
+         0.24584794, 0.17518721],
+        [0.3926423 , 0.92625031, 0.63635179, ..., 0.88632083,
+         0.81982371, 0.47538981],
+        [0.85482614, 0.19672312, 0.95818328, ..., 0.60131525,
+         0.87420672, 0.75128022],
+        [0.09667882, 0.97641521, 0.06003241, ..., 0.61777137,
+         0.33593841, 0.57938191]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 1.947 1.949 1.951
+    subject  (trials) int64 3 3 3 3 3 3 3 3 3 3
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_4&#39; (trials: 10, roi: 5, times: 1000)&gt;
+array([[[0.7656045 , 0.05053638, 0.99754485, ..., 0.95335172,
+         0.5788796 , 0.29139989],
+        [0.51682225, 0.36444708, 0.62818007, ..., 0.6355037 ,
+         0.93045786, 0.34023885],
+        [0.18720436, 0.73320301, 0.05804614, ..., 0.24592229,
+         0.90324031, 0.35898838],
+        [0.54763752, 0.90303214, 0.32884094, ..., 0.73709525,
+         0.80050063, 0.24828481],
+        [0.89050572, 0.25374395, 0.34521201, ..., 0.00858625,
+         0.19882708, 0.46291911]],
+
+       [[0.92297623, 0.00559588, 0.12891825, ..., 0.84221377,
+         0.31422572, 0.48157728],
+        [0.57089767, 0.02812589, 0.65511751, ..., 0.28034522,
+         0.0387194 , 0.60226164],
+        [0.20376253, 0.68499026, 0.32053564, ..., 0.45314391,
+         0.11603825, 0.13037216],
+        [0.19290648, 0.66385055, 0.49173663, ..., 0.71865936,
+         0.99136423, 0.47518236],
+        [0.5022024 , 0.88138976, 0.95937764, ..., 0.04497509,
+...
+         0.67656491, 0.38513726],
+        [0.75046225, 0.02662174, 0.19568552, ..., 0.31807216,
+         0.76267582, 0.27216786],
+        [0.89686082, 0.19306811, 0.44585047, ..., 0.41061865,
+         0.78709959, 0.47438681],
+        [0.66926729, 0.99161419, 0.01896266, ..., 0.46087072,
+         0.54550167, 0.69404198],
+        [0.45036156, 0.08921504, 0.1890465 , ..., 0.16500208,
+         0.50642976, 0.01874647]],
+
+       [[0.51748192, 0.67547257, 0.95384343, ..., 0.98960301,
+         0.55060659, 0.21135727],
+        [0.27700468, 0.67307756, 0.80843318, ..., 0.34454633,
+         0.13994967, 0.93283239],
+        [0.037782  , 0.63508146, 0.9125745 , ..., 0.1567181 ,
+         0.48630129, 0.42530774],
+        [0.58801726, 0.63688667, 0.34326685, ..., 0.27192547,
+         0.91758749, 0.52274463],
+        [0.45380056, 0.78432347, 0.09169052, ..., 0.54986173,
+         0.87839882, 0.37246592]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 1.947 1.949 1.951
+    subject  (trials) int64 4 4 4 4 4 4 4 4 4 4
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+</pre></div>
+</div>
+</section>
+<section id="data-smoothing">
+<h2>Data smoothing<a class="headerlink" href="#data-smoothing" title="Permalink to this heading">#</a></h2>
+<p>If you have MNE-Python installed, you can also smooth the data using
+<a class="reference internal" href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.savgol_filter" title="frites.dataset.DatasetEphy.savgol_filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">frites.dataset.DatasetEphy.savgol_filter</span></code></a>. One important thing is
+that operations are performed inplace, which means that once launched, the
+data are modified inside the dataset without copy</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># high cut-off frequency at 4Hz</span>
+<a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.savgol_filter" title="frites.dataset.DatasetEphy.savgol_filter" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-method"><span class="n">dt</span><span class="o">.</span><span class="n">savgol_filter</span></a><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.times" title="frites.dataset.DatasetEphy.times" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">times</span></a><span class="p">,</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.x" title="frites.dataset.DatasetEphy.x" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">x</span></a><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Times&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Smoothed dataset&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_dataset_ephy_002.png" srcset="../../_images/sphx_glr_plot_dataset_ephy_002.png" alt="Smoothed dataset" class = "sphx-glr-single-img"/></section>
+<section id="temporal-slicing">
+<h2>Temporal slicing<a class="headerlink" href="#temporal-slicing" title="Permalink to this heading">#</a></h2>
+<p>The dataset also supports some basic slicing operations through time. Slicing
+is still performed inplace</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># temporal selection between [0.25, 1.75]</span>
+<a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a> <span class="o">=</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.sel" title="frites.dataset.DatasetEphy.sel" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-method"><span class="n">dt</span><span class="o">.</span><span class="n">sel</span></a><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">))</span>
+
+<span class="c1"># sphinx_gallery_thumbnail_number = 3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.times" title="frites.dataset.DatasetEphy.times" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">times</span></a><span class="p">,</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.x" title="frites.dataset.DatasetEphy.x" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">x</span></a><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Times&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Temporal slicing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_plot_dataset_ephy_003.png" srcset="../../_images/sphx_glr_plot_dataset_ephy_003.png" alt="Temporal slicing" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.498 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  464 MB</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-dataset-plot-dataset-ephy-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b36ae8dc9880fcb5a90d024fa38c67d5/plot_dataset_ephy.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_dataset_ephy.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/a03b470839dc8016ec8b8baebc33b3f8/plot_dataset_ephy.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_dataset_ephy.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/73404fc6d4dcd273a3f877ace667ec3a/plot_dataset_ephy.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_dataset_ephy.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_dataset_mne.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Define an electrophysiological dataset using MNE-Python structures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plot_dataset_xarray.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Define an electrophysiological dataset using Xarray</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-artificial-data">Create artificial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-dataset">Create the dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-smoothing">Data smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-slicing">Temporal slicing</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

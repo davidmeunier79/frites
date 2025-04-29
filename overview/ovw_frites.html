@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Start analyzing your data with Frites &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overview/ovw_frites';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Performance" href="ovw_perf.html" />
+    <link rel="prev" title="Methods" href="ovw_methods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="../_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ovw_goals.html">Goals of Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_methods.html">Methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Start analyzing your data with Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_perf.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_help.html">Report, contribute and get help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_cite.html">Cite Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_refs.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_whatsnew.html">What’s new</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Overview</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Start...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="start-analyzing-your-data-with-frites">
+<h1>Start analyzing your data with Frites<a class="headerlink" href="#start-analyzing-your-data-with-frites" title="Permalink to this heading">#</a></h1>
+<p>In this section we are going to cover the basics knowledge if you want to start analyzing your data with Frites.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The gallery of examples contains a <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#tutorials">tutorial</a> section that explain and illustrate the main usages and features of Frites, in a notebook fashion.</p>
+</div>
+<section id="package-organization">
+<h2>Package organization<a class="headerlink" href="#package-organization" title="Permalink to this heading">#</a></h2>
+<p>As other Python packages, Frites contains subject-specific submodules. Here’s a short description of the main submodules for new users :</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/api_dataset.html#module-frites.dataset" title="frites.dataset"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frites.dataset</span></code></a>: : container for the electrophysiological data coming from multiple subjects (see also <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#multi-subjects-dataset">examples</a> that explain how to define a container depending on your data type)</p></li>
+<li><p><a class="reference internal" href="../api/api_workflow.html#module-frites.workflow" title="frites.workflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frites.workflow</span></code></a>: the workflows perform a series of analyzes (usually a first analysis to extract information using IT measures follow by a second statistical analysis)</p></li>
+<li><p><a class="reference internal" href="../api/api_connectivity.html#module-frites.conn" title="frites.conn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frites.conn</span></code></a>: : directed and undirected connectivity metrics that can either be computed across trials or at the single trial level</p></li>
+</ul>
+<p>In addition to the main modules above, the  <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html">gallery of examples</a> illustrate the main functionalities of Frites using simulated data. Those functions can be imported from <a class="reference internal" href="../api/api_simulations.html#module-frites.simulations" title="frites.simulations"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frites.simulations</span></code></a>: and can be used to simulate local neural activity modulated by the task such as stimulus-specific brain networks using <a class="reference external" href="https://brainets.github.io/frites/api/api_simulations.html#stimulus-specific-autoregressive-model">autoregressive models</a>.</p>
+<p>Finally, for the developers here the <a class="reference internal" href="../api/api_core.html#module-frites.core" title="frites.core"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frites.core</span></code></a>: module include the very low level functions to estimate the mutual information (vector and tensor based implementations).</p>
+</section>
+<section id="main-frites-workflows">
+<h2>Main Frites’ workflows<a class="headerlink" href="#main-frites-workflows" title="Permalink to this heading">#</a></h2>
+<p>Frites contains two centrals workflows :</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="../api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi" title="frites.workflow.WfMi"><code class="xref py py-class docutils literal notranslate"><span class="pre">frites.workflow.WfMi</span></code></a> : the main workflow of mutual-information that is used to <strong>extract feature-specific brain networks</strong></p></li>
+<li><p><a class="reference internal" href="../api/generated/frites.workflow.WfStats.html#frites.workflow.WfStats" title="frites.workflow.WfStats"><code class="xref py py-class docutils literal notranslate"><span class="pre">frites.workflow.WfStats</span></code></a> : the workflow of statistics we used to perform group-level inferences</p></li>
+</ol>
+<p>Actually, under the hood, the <strong>WfMi</strong> is also using the workflow of statistics so that it return the estimation of mutual-information between a feature and the data but also the corresponding p-values.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This workflow of mutual-information can be used for many things, including :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Provide a meaningful measure of effect-size between the data and a feature</p></li>
+<li><p>To find some significant differences between multiple experimental conditions (<code class="docutils literal notranslate"><span class="pre">mi_type='cd</span></code>)</p></li>
+<li><p>To correlate the brain data with a behavioral model (<code class="docutils literal notranslate"><span class="pre">mi_type='cc</span></code>) and possibly, independently of some experimental conditions (<code class="docutils literal notranslate"><span class="pre">mi_type='ccd</span></code>)</p></li>
+<li><p>Get the corrected p-values to see whether you have a significant amount of information between your data and a feature, either at the group-level or at the subject level</p></li>
+<li><p>Working on sparse data like the sEEG / iEEG where the number of subjects per brain region varies</p></li>
+</ul>
+</div></blockquote>
+<p>In a nutshell, the <strong>WfMi</strong> is the core workflow to find task-related activity. In addition, this workflow can either be used to quantify the amount of information between local neural activity and a feature <strong>(i.e for each brain region)</strong> but also on <strong>connectivity links (i.e on pairs of brain regions)</strong> to see whether there’s some differences in term of connectivity between experimental conditions or ultimately, if the connectivity correlates with a behavioral model.</p>
+<p>To see this workflow in action, checkout <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#mutual-information">those examples</a></p>
+</div>
+</section>
+<section id="step-by-step-presentation-of-the-workflow">
+<h2>Step by step presentation of the workflow<a class="headerlink" href="#step-by-step-presentation-of-the-workflow" title="Permalink to this heading">#</a></h2>
+<p>Here is a step by step presentation of the <strong>WfMi</strong> and <strong>WfStats</strong> workflows :</p>
+<ol class="arabic simple">
+<li><p><strong>WfMi : effect size and permutations estimation :</strong> the first step consist in estimating the amount of information shared between the brain data and the external variable. For the FFX, the information is computed <strong>across subjects</strong> while for the RFX the information is computed <strong>per subject</strong> (See <a class="reference internal" href="ovw_methods.html#meth-stats-gp"><span class="std std-ref">Subject and group-level statistical inferences</span></a> for a more detailed description of the FFX and RFX). See the section about how the amount of information is computed (<a class="reference internal" href="ovw_methods.html#meth-gcmi"><span class="std std-ref">Gaussian Copula Mutual Information</span></a>) and which type of information you can use (<a class="reference internal" href="ovw_methods.html#meth-gcmi-types"><span class="std std-ref">The different types of mutual information</span></a>). For computing the permutations, we randomly shuffle the y variable and then recompute the MI between x and the permuted version of y. For the RFX specifically, a t-test across participants and against the permutation mean is used to form the effect at the group-level.</p></li>
+<li><p><strong>WfStats : correction for multiple comparisons and significant testing :</strong> we are using the 95th percentile of the permutations to form the clusters, both on the true effect size and on the permutations. Finally, for correcting for multiple comparisons and to infer the p-value, we compare the mass of the cluster with the distribution of maximums cluster mass obtained across space.</p></li>
+</ol>
+<p>Those steps are summarized in the figure below.</p>
+<figure class="align-center" id="id3">
+<img alt="../_images/stat_pipeline.png" src="../_images/stat_pipeline.png" />
+<figcaption>
+<p><span class="caption-text">Algorithmic presentation of the statistical pipeline. Extracted from Combrisson et al., 2022 <a class="bibtex reference internal" href="ovw_refs.html#combrisson-group-level-2022" id="id1">[4]</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For a more detailed discussion on group-level analysis, on non-parametric statistics and on corrections for multiple comparisons, see the section <a class="reference internal" href="ovw_methods.html#meth-stats-gp"><span class="std std-ref">Subject and group-level statistical inferences</span></a>, see Combrisson et al., 2022 <a class="bibtex reference internal" href="ovw_refs.html#combrisson-group-level-2022" id="id2">[4]</a>.</p>
+</section>
+<section id="deep-integration-with-xarray">
+<h2>Deep integration with Xarray<a class="headerlink" href="#deep-integration-with-xarray" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="http://xarray.pydata.org/en/stable/">Xarray</a> is a recent python package to handle of multi-dimensional arrays using labels. For those who are familiar with <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, you can see Xarray as a generalization of Pandas for multi-dimensional arrays.</p>
+<p>Xarray provide a container for the data called <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.DataArray.html#xarray.DataArray">DataArray</a>. This structure comes with two important inputs : 1) <cite>dims</cite> which describe the name of each dimension of the array and 2) <cite>coords</cite> the values taken by each dimension. For example you can define a DataArray with the dimensions <code class="docutils literal notranslate"><span class="pre">('roi',</span> <span class="pre">'times')</span></code> where <code class="docutils literal notranslate"><span class="pre">roi</span> <span class="pre">=</span> <span class="pre">['insula',</span> <span class="pre">'vmPFC',</span> <span class="pre">'dlPFC']</span></code> and <code class="docutils literal notranslate"><span class="pre">times</span> <span class="pre">=</span> <span class="pre">np.linspace(-3,</span> <span class="pre">3,</span> <span class="pre">1000)</span></code>. After that, the manipulation of the data happen using the values of the coordinates. Bellow, a minimal slicing example :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`da` is a xarray.DataArray. With the code line below, we select the data</span>
+<span class="sd">coming from the two brain regions Insula and vmPFC. Then we also select</span>
+<span class="sd">every time points comprised between [-1.5, 1.5] seconds</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">da</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;insula&#39;</span><span class="p">,</span> <span class="s1">&#39;vmPFC&#39;</span><span class="p">],</span> <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The example above only show how to slice the data but actually Xarray contains most of the operations using the same label-based syntax.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Frites make an extensive use of Xarray as most of the outputs returned are DataArrays. Since it’s a relatively recent package, we wrote <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#xarray">two mini tutorials</a> to start working with it.</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ovw_methods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ovw_perf.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Performance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-organization">Package organization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-frites-workflows">Main Frites’ workflows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-presentation-of-the-workflow">Step by step presentation of the workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-integration-with-xarray">Deep integration with Xarray</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

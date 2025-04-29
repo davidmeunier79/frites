@@ -1,0 +1,996 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.__getitem__">__getitem__() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.__hash__">__hash__ (frites.dataset.SubjectEphy attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.utils.acf.html#frites.utils.acf">acf() (in module frites.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.ar">ar (frites.simulations.StimSpecAR property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.estimator.BinMIEstimator.html#frites.estimator.BinMIEstimator">BinMIEstimator (class in frites.estimator)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.stats.bootstrap_partitions.html#frites.stats.bootstrap_partitions">bootstrap_partitions() (in module frites.stats)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.clean">clean() (frites.workflow.WfConnComod method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.clean">(frites.workflow.WfMi method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.clear">clear() (frites.dataset.SubjectEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.stats.cluster_correction_mcp.html#frites.stats.cluster_correction_mcp">cluster_correction_mcp() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfStats.html#frites.workflow.WfStats.cluster_th">cluster_th (frites.workflow.WfStats property)</a>
+</li>
+      <li><a href="api/generated/frites.stats.cluster_threshold.html#frites.stats.cluster_threshold">cluster_threshold() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.core.cmi_1d_ggg.html#frites.core.cmi_1d_ggg">cmi_1d_ggg() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.cmi_nd_ggg.html#frites.core.cmi_nd_ggg">cmi_nd_ggg() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.compute_covgc">compute_covgc() (frites.simulations.StimSpecAR method)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.confidence_interval">confidence_interval() (frites.workflow.WfMi method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.stats.confidence_interval.html#frites.stats.confidence_interval">(in module frites.stats)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.conjunction_analysis">conjunction_analysis() (frites.workflow.WfMi method)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_ccf.html#frites.conn.conn_ccf">conn_ccf() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_covgc.html#frites.conn.conn_covgc">conn_covgc() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_dfc.html#frites.conn.conn_dfc">conn_dfc() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_fcd_corr.html#frites.conn.conn_fcd_corr">conn_fcd_corr() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_fit.html#frites.conn.conn_fit">conn_fit() (in module frites.conn)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.conn.conn_get_pairs.html#frites.conn.conn_get_pairs">conn_get_pairs() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_ii.html#frites.conn.conn_ii">conn_ii() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_links.html#frites.conn.conn_links">conn_links() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_net.html#frites.conn.conn_net">conn_net() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_pid.html#frites.conn.conn_pid">conn_pid() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_ravel_directed.html#frites.conn.conn_ravel_directed">conn_ravel_directed() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_reshape_directed.html#frites.conn.conn_reshape_directed">conn_reshape_directed() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_reshape_undirected.html#frites.conn.conn_reshape_undirected">conn_reshape_undirected() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_spec.html#frites.conn.conn_spec">conn_spec() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.conn.conn_te.html#frites.conn.conn_te">conn_te() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.core.copnorm_1d.html#frites.core.copnorm_1d">copnorm_1d() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.copnorm_cat_1d.html#frites.core.copnorm_cat_1d">copnorm_cat_1d() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.copnorm_cat_nd.html#frites.core.copnorm_cat_nd">copnorm_cat_nd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.copnorm_nd.html#frites.core.copnorm_nd">copnorm_nd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.copy">copy() (frites.workflow.WfMi method)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.CorrEstimator.html#frites.estimator.CorrEstimator">CorrEstimator (class in frites.estimator)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.CustomEstimator.html#frites.estimator.CustomEstimator">CustomEstimator (class in frites.estimator)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy">DatasetEphy (class in frites.dataset)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.DcorrEstimator.html#frites.estimator.DcorrEstimator">DcorrEstimator (class in frites.estimator)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.conn.define_windows.html#frites.conn.define_windows">define_windows() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.df_rs">df_rs (frites.dataset.DatasetEphy property)</a>
+</li>
+      <li><a href="api/generated/frites.utils.downsample.html#frites.utils.downsample">downsample() (in module frites.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.core.ent_1d_g.html#frites.core.ent_1d_g">ent_1d_g() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.ent_nd_g.html#frites.core.ent_nd_g">ent_nd_g() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.BinMIEstimator.html#frites.estimator.BinMIEstimator.estimate">estimate() (frites.estimator.BinMIEstimator method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.estimator.CorrEstimator.html#frites.estimator.CorrEstimator.estimate">(frites.estimator.CorrEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.CustomEstimator.html#frites.estimator.CustomEstimator.estimate">(frites.estimator.CustomEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.DcorrEstimator.html#frites.estimator.DcorrEstimator.estimate">(frites.estimator.DcorrEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.GCMIEstimator.html#frites.estimator.GCMIEstimator.estimate">(frites.estimator.GCMIEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.ResamplingEstimator.html#frites.estimator.ResamplingEstimator.estimate">(frites.estimator.ResamplingEstimator method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.fit">fit() (frites.simulations.StimSpecAR method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.fit">(frites.workflow.WfConnComod method)</a>
+</li>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.fit">(frites.workflow.WfMi method)</a>
+</li>
+        <li><a href="api/generated/frites.workflow.WfStats.html#frites.workflow.WfStats.fit">(frites.workflow.WfStats method)</a>
+</li>
+      </ul></li>
+      <li>
+    frites.conn
+
+      <ul>
+        <li><a href="api/api_connectivity.html#module-frites.conn">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.core
+
+      <ul>
+        <li><a href="api/api_core.html#module-frites.core">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.dataset
+
+      <ul>
+        <li><a href="api/api_dataset.html#module-frites.dataset">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.estimator
+
+      <ul>
+        <li><a href="api/api_estimators.html#module-frites.estimator">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    frites.plot
+
+      <ul>
+        <li><a href="api/api_plot.html#module-frites.plot">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.simulations
+
+      <ul>
+        <li><a href="api/api_simulations.html#module-frites.simulations">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.stats
+
+      <ul>
+        <li><a href="api/api_statistics.html#module-frites.stats">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.utils
+
+      <ul>
+        <li><a href="api/api_utils.html#module-frites.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    frites.workflow
+
+      <ul>
+        <li><a href="api/api_workflow.html#module-frites.workflow">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.gc">gc (frites.simulations.StimSpecAR property)</a>
+</li>
+      <li><a href="api/generated/frites.core.gccmi_1d_ccc.html#frites.core.gccmi_1d_ccc">gccmi_1d_ccc() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gccmi_1d_ccd.html#frites.core.gccmi_1d_ccd">gccmi_1d_ccd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gccmi_model_nd_cdnd.html#frites.core.gccmi_model_nd_cdnd">gccmi_model_nd_cdnd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gccmi_nd_ccc.html#frites.core.gccmi_nd_ccc">gccmi_nd_ccc() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gccmi_nd_ccnd.html#frites.core.gccmi_nd_ccnd">gccmi_nd_ccnd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gcmi_1d_cc.html#frites.core.gcmi_1d_cc">gcmi_1d_cc() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gcmi_mixture_1d_cd.html#frites.core.gcmi_mixture_1d_cd">gcmi_mixture_1d_cd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gcmi_model_1d_cd.html#frites.core.gcmi_model_1d_cd">gcmi_model_1d_cd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gcmi_model_nd_cd.html#frites.core.gcmi_model_nd_cd">gcmi_model_nd_cd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.gcmi_nd_cc.html#frites.core.gcmi_nd_cc">gcmi_nd_cc() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.GCMIEstimator.html#frites.estimator.GCMIEstimator">GCMIEstimator (class in frites.estimator)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.get">get() (frites.dataset.SubjectEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.utils.get_closest_sample.html#frites.utils.get_closest_sample">get_closest_sample() (in module frites.utils)</a>
+</li>
+      <li><a href="api/generated/frites.get_config.html#frites.get_config">get_config() (in module frites)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.get_connectivity_pairs">get_connectivity_pairs() (frites.dataset.DatasetEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.estimator.BinMIEstimator.html#frites.estimator.BinMIEstimator.get_function">get_function() (frites.estimator.BinMIEstimator method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.estimator.CorrEstimator.html#frites.estimator.CorrEstimator.get_function">(frites.estimator.CorrEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.CustomEstimator.html#frites.estimator.CustomEstimator.get_function">(frites.estimator.CustomEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.DcorrEstimator.html#frites.estimator.DcorrEstimator.get_function">(frites.estimator.DcorrEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.GCMIEstimator.html#frites.estimator.GCMIEstimator.get_function">(frites.estimator.GCMIEstimator method)</a>
+</li>
+        <li><a href="api/generated/frites.estimator.ResamplingEstimator.html#frites.estimator.ResamplingEstimator.get_function">(frites.estimator.ResamplingEstimator method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.get_params">get_params() (frites.workflow.WfMi method)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.get_roi_data">get_roi_data() (frites.dataset.DatasetEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.isel">isel() (frites.dataset.DatasetEphy method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.items">items() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.utils.kernel_smoothing.html#frites.utils.kernel_smoothing">kernel_smoothing() (in module frites.utils)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.keys">keys() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.merge">merge() (frites.dataset.SubjectEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.mi">mi (frites.simulations.StimSpecAR property)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.mi">(frites.workflow.WfConnComod property)</a>
+</li>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.mi">(frites.workflow.WfMi property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.core.mi_1d_gg.html#frites.core.mi_1d_gg">mi_1d_gg() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.mi_mixture_1d_gd.html#frites.core.mi_mixture_1d_gd">mi_mixture_1d_gd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.mi_model_1d_gd.html#frites.core.mi_model_1d_gd">mi_model_1d_gd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.mi_model_nd_gd.html#frites.core.mi_model_nd_gd">mi_model_nd_gd() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.core.mi_nd_gg.html#frites.core.mi_nd_gg">mi_nd_gg() (in module frites.core)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.mi_p">mi_p (frites.workflow.WfConnComod property)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.mi_p">(frites.workflow.WfMi property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/api_connectivity.html#module-frites.conn">frites.conn</a>
+</li>
+        <li><a href="api/api_core.html#module-frites.core">frites.core</a>
+</li>
+        <li><a href="api/api_dataset.html#module-frites.dataset">frites.dataset</a>
+</li>
+        <li><a href="api/api_estimators.html#module-frites.estimator">frites.estimator</a>
+</li>
+        <li><a href="api/api_plot.html#module-frites.plot">frites.plot</a>
+</li>
+        <li><a href="api/api_simulations.html#module-frites.simulations">frites.simulations</a>
+</li>
+        <li><a href="api/api_statistics.html#module-frites.stats">frites.stats</a>
+</li>
+        <li><a href="api/api_utils.html#module-frites.utils">frites.utils</a>
+</li>
+        <li><a href="api/api_workflow.html#module-frites.workflow">frites.workflow</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.stats.permute_mi_trials.html#frites.stats.permute_mi_trials">permute_mi_trials() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.stats.permute_mi_vector.html#frites.stats.permute_mi_vector">permute_mi_vector() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.plot">plot() (frites.simulations.StimSpecAR method)</a>
+</li>
+      <li><a href="api/generated/frites.plot.plot_conn_circle.html#frites.plot.plot_conn_circle">plot_conn_circle() (in module frites.plot)</a>
+</li>
+      <li><a href="api/generated/frites.plot.plot_conn_heatmap.html#frites.plot.plot_conn_heatmap">plot_conn_heatmap() (in module frites.plot)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.plot_covgc">plot_covgc() (frites.simulations.StimSpecAR method)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR.plot_model">plot_model() (frites.simulations.StimSpecAR method)</a>
+</li>
+      <li><a href="api/generated/frites.conn.plot_windows.html#frites.conn.plot_windows">plot_windows() (in module frites.conn)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.pop">pop() (frites.dataset.SubjectEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.popitem">popitem() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.estimator.ResamplingEstimator.html#frites.estimator.ResamplingEstimator">ResamplingEstimator (class in frites.estimator)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.stats.rfx_ttest.html#frites.stats.rfx_ttest">rfx_ttest() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.roi_names">roi_names (frites.dataset.DatasetEphy property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.savgol_filter">savgol_filter() (frites.dataset.DatasetEphy method)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.utils.savgol_filter.html#frites.utils.savgol_filter">(in module frites.utils)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.sel">sel() (frites.dataset.DatasetEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.set_config.html#frites.set_config">set_config() (in module frites)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.setdefault">setdefault() (frites.dataset.SubjectEphy method)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_ground_truth.html#frites.simulations.sim_ground_truth">sim_ground_truth() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_local_cc_ms.html#frites.simulations.sim_local_cc_ms">sim_local_cc_ms() (in module frites.simulations)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.simulations.sim_local_cc_ss.html#frites.simulations.sim_local_cc_ss">sim_local_cc_ss() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_local_ccd_ms.html#frites.simulations.sim_local_ccd_ms">sim_local_ccd_ms() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_local_ccd_ss.html#frites.simulations.sim_local_ccd_ss">sim_local_ccd_ss() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_local_cd_ms.html#frites.simulations.sim_local_cd_ms">sim_local_cd_ms() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.sim_local_cd_ss.html#frites.simulations.sim_local_cd_ss">sim_local_cd_ss() (in module frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.utils.split_group.html#frites.utils.split_group">split_group() (in module frites.utils)</a>
+</li>
+      <li><a href="api/generated/frites.simulations.StimSpecAR.html#frites.simulations.StimSpecAR">StimSpecAR (class in frites.simulations)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy">SubjectEphy (class in frites.dataset)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.stats.testwise_correction_mcp.html#frites.stats.testwise_correction_mcp">testwise_correction_mcp() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.utils.time_to_sample.html#frites.utils.time_to_sample">time_to_sample() (in module frites.utils)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.times">times (frites.dataset.DatasetEphy property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.stats.ttest_1samp.html#frites.stats.ttest_1samp">ttest_1samp() (in module frites.stats)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.tvalues">tvalues (frites.workflow.WfConnComod property)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.tvalues">(frites.workflow.WfMi property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.update">update() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.values">values() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod.wf_stats">wf_stats (frites.workflow.WfConnComod property)</a>
+
+      <ul>
+        <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi.wf_stats">(frites.workflow.WfMi property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/frites.workflow.WfConnComod.html#frites.workflow.WfConnComod">WfConnComod (class in frites.workflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.workflow.WfMi.html#frites.workflow.WfMi">WfMi (class in frites.workflow)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfMiCombine.html#frites.workflow.WfMiCombine">WfMiCombine (class in frites.workflow)</a>
+</li>
+      <li><a href="api/generated/frites.workflow.WfStats.html#frites.workflow.WfStats">WfStats (class in frites.workflow)</a>
+</li>
+      <li><a href="api/generated/frites.dataset.SubjectEphy.html#frites.dataset.SubjectEphy.wrap_xr">wrap_xr() (frites.dataset.SubjectEphy method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.x">x (frites.dataset.DatasetEphy property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

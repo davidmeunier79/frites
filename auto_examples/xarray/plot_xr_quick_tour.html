@@ -1,0 +1,931 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Xarray : Quick tour &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/xarray/plot_xr_quick_tour';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Xarray : Saving the results" href="plot_xr_export.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_dfc_estimator.html">Estimate the Dynamic Functional Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_stim_spec_network.html">Statistical analysis of a stimulus-specific network</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dataset/index.html">Multi-subjects dataset</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dataset/plot_dataset_mne.html">Define an electrophysiological dataset using MNE-Python structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dataset/plot_dataset_ephy.html">Build an electrophysiological dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dataset/plot_dataset_xarray.html">Define an electrophysiological dataset using Xarray</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mi/index.html">Group-level statistics on measures of information</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_ccd.html">MI between two continuous variables conditioned by a discret one</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cd.html">MI between a continuous and a discret variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cc.html">MI between two continuous variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_time_frequency.html">Compute MI across time and frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_combine.html">Investigate relation of order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_conjunction.html">Compute a conjunction analysis on mutual-information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_contact_level.html">Mutual-information at the contact level</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../estimators/index.html">Information-based estimators</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_resample.html">Trial-resampling: correcting for unbalanced designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_custom.html">Defining a custom estimator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_comparison.html">Estimator comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conn/index.html">Connectivity and Information Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_fit.html">FIT: Feature specific information transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_pid.html">PID: Decomposing the information carried by pairs of brain regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_dfc.html">Estimate dynamic functional connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ii.html">Estimate interaction information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_conn.html">Estimate comodulations between brain areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ccf.html">Lag estimation between delayed times-series using the cross-correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_covgc.html">Estimate the covariance-based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../armodel/index.html">Autoregressive model</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_pairwise.html">AR : pairwise illustration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_instantaneous.html">AR : simulate common driving input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_condcovgc.html">AR : conditional covariance based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utility</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/plot_time_windows.html">Define temporal windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../statistics/index.html">Statistics</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_ffx.html">Compare within-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_rfx.html">Compare between-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_ci_cc.html">Estimate the empirical confidence interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulations/index.html">Simulations</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_generate_random_data.html">Generate random electrophysiological data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_ground_truth.html">Generate spatio-temporal ground-truths</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../performance/index.html">Performance</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../performance/plot_vector_vs_tensor.html">Comparison between tensor and vector based computations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Xarray</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_xr_export.html">Xarray : Saving the results</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Xarray : Quick tour</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Xarray</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Xarray : Quick tour</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-xarray-plot-xr-quick-tour-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="xarray-quick-tour">
+<span id="sphx-glr-auto-examples-xarray-plot-xr-quick-tour-py"></span><h1>Xarray : Quick tour<a class="headerlink" href="#xarray-quick-tour" title="Permalink to this heading">#</a></h1>
+<p>Basically, this example gives a very small introduction to Xarray (very small).
+We illustrate how to define a DataArray container, access its components,
+perform some of the basic operations and slicing / indexing.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<section id="simulate-data">
+<h2>Simulate data<a class="headerlink" href="#simulate-data" title="Permalink to this heading">#</a></h2>
+<p>lets start by creating a random spatio-temporal array</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">n_times</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">n_roi</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">times_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
+<span class="n">roi_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;roi_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_roi</span><span class="p">)])</span>
+<span class="n">np_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_times</span><span class="p">,</span> <span class="n">n_roi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(30, 7)
+*******************************************************************************
+</pre></div>
+</div>
+</section>
+<section id="xarray-conversion-and-access-to-the-internal-components">
+<h2>Xarray conversion and access to the internal components<a class="headerlink" href="#xarray-conversion-and-access-to-the-internal-components" title="Permalink to this heading">#</a></h2>
+<p>A DataArray is a container (like a well known numpy array) except that you
+can add a label to each coordinate. To this end, the input <cite>dims</cite> is a tuple
+that describes the dimension names and <cite>coords</cite> describes the value along
+this coordinate</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s convert it to a DataArray</span>
+<span class="n">da_data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np_data</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="s1">&#39;roi&#39;</span><span class="p">),</span>
+                       <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">times_vec</span><span class="p">,</span> <span class="n">roi_vec</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">da_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">da_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># if you want to get the dimension names and values</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dimension names : </span><span class="si">{</span><span class="n">da_data</span><span class="o">.</span><span class="n">dims</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dimension values : </span><span class="si">{</span><span class="n">da_data</span><span class="o">.</span><span class="n">coords</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data of a specific dimension : </span><span class="si">{</span><span class="n">da_data</span><span class="o">.</span><span class="n">roi</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># if you want to get the original NumPy array enter the following :</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">data</span>
+
+<span class="c1"># if you want to change the values of a coordinate</span>
+<span class="n">da_data</span><span class="p">[</span><span class="s1">&#39;roi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;roi_</span><span class="si">{</span><span class="n">k</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_roi</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New ROI names : </span><span class="si">{</span><span class="n">da_data</span><span class="o">.</span><span class="n">roi</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># if you need to compute or get the min / max / mean across a specific</span>
+<span class="c1"># dimension</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">)</span>  <span class="c1"># minimum across time points</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="s1">&#39;times&#39;</span><span class="p">)</span>  <span class="c1"># maximum across time points</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;roi&#39;</span><span class="p">)</span>   <span class="c1"># mean across all ROI</span>
+
+<span class="c1"># similarly to Pandas, it&#39;s also possible to group along a dimension and then</span>
+<span class="c1"># take the mean. For example, here&#39;s how to group and mean by roi names</span>
+<span class="n">da_m</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;roi&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s1">&#39;roi&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">da_m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(30, 7)
+&lt;xarray.DataArray (times: 30, roi: 7)&gt;
+array([[0.45250423, 0.81953048, 0.68086604, 0.13671123, 0.35727182,
+        0.69705263, 0.18550697],
+       [0.03348622, 0.60993492, 0.57175041, 0.44628991, 0.60917852,
+        0.32409775, 0.57827572],
+       [0.1745737 , 0.68033589, 0.3580109 , 0.76263188, 0.17549235,
+        0.29729328, 0.47052988],
+       [0.44484418, 0.15133033, 0.27449366, 0.60742285, 0.86630082,
+        0.54416071, 0.93129645],
+       [0.18373614, 0.5903104 , 0.35515531, 0.2989301 , 0.19236575,
+        0.63762854, 0.63306055],
+       [0.3281656 , 0.87692316, 0.84959453, 0.54985696, 0.83498028,
+        0.37108317, 0.20976327],
+       [0.47049288, 0.56452455, 0.10584779, 0.08250566, 0.72504829,
+        0.2737648 , 0.87159849],
+       [0.83923488, 0.59514662, 0.32759059, 0.2522432 , 0.38707588,
+        0.78638133, 0.02435129],
+       [0.52256746, 0.60323761, 0.54008351, 0.9237543 , 0.1594425 ,
+        0.19056107, 0.19126668],
+       [0.86825348, 0.78603006, 0.23996522, 0.64042716, 0.13678682,
+        0.8015636 , 0.88131854],
+...
+       [0.27072135, 0.1256662 , 0.90822865, 0.81374921, 0.39051523,
+        0.81447342, 0.92334286],
+       [0.56047253, 0.17418467, 0.24712609, 0.8671212 , 0.56349887,
+        0.05852145, 0.52599213],
+       [0.50294822, 0.33203095, 0.45564797, 0.90327296, 0.44672216,
+        0.53741464, 0.13795948],
+       [0.56662134, 0.49131709, 0.89062454, 0.29382485, 0.26374601,
+        0.2917747 , 0.88206192],
+       [0.04601255, 0.73168949, 0.64634379, 0.80054755, 0.41159759,
+        0.99514001, 0.20837187],
+       [0.8347184 , 0.42530164, 0.217003  , 0.2869445 , 0.33682909,
+        0.38828474, 0.91538539],
+       [0.64718667, 0.49830466, 0.65288199, 0.21431652, 0.72321654,
+        0.68441242, 0.15672775],
+       [0.20195569, 0.30838732, 0.73105151, 0.26092498, 0.08883536,
+        0.13203418, 0.55180883],
+       [0.2297453 , 0.93047633, 0.57148398, 0.39547661, 0.81432978,
+        0.47026569, 0.26262482],
+       [0.16014147, 0.86258383, 0.02874299, 0.51285796, 0.85892025,
+        0.79302081, 0.14379835]])
+Coordinates:
+  * times    (times) float64 -1.0 -0.931 -0.8621 -0.7931 ... 0.8621 0.931 1.0
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_3&#39; &#39;roi_4&#39; &#39;roi_5&#39; &#39;roi_6&#39;
+*******************************************************************************
+Dimension names : (&#39;times&#39;, &#39;roi&#39;)
+Dimension values : Coordinates:
+  * times    (times) float64 -1.0 -0.931 -0.8621 -0.7931 ... 0.8621 0.931 1.0
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_3&#39; &#39;roi_4&#39; &#39;roi_5&#39; &#39;roi_6&#39;
+Data of a specific dimension : [&#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_3&#39; &#39;roi_4&#39; &#39;roi_5&#39; &#39;roi_6&#39;]
+*******************************************************************************
+New ROI names : [&#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39;]
+*******************************************************************************
+&lt;xarray.DataArray (times: 30, roi: 3)&gt;
+array([[0.25824081, 0.58840115, 0.68895933],
+       [0.35268395, 0.60955672, 0.44792408],
+       [0.46924515, 0.42791412, 0.32765209],
+       [0.66118783, 0.50881557, 0.40932719],
+       [0.37190893, 0.39133807, 0.49639193],
+       [0.36259528, 0.85595172, 0.61033885],
+       [0.47486567, 0.64478642, 0.1898063 ],
+       [0.37194312, 0.49111125, 0.55698596],
+       [0.54586281, 0.38134005, 0.36532229],
+       [0.79666639, 0.46140844, 0.52076441],
+       [0.50557987, 0.62123993, 0.29911909],
+       [0.53282052, 0.28000556, 0.51688376],
+       [0.49236097, 0.20471139, 0.62999683],
+       [0.28847505, 0.40477803, 0.29917206],
+       [0.3940753 , 0.61786047, 0.81810043],
+       [0.42780297, 0.46607415, 0.13133179],
+       [0.69984301, 0.83090841, 0.65974832],
+       [0.49748786, 0.54342099, 0.4441187 ],
+       [0.58063406, 0.47225411, 0.12471474],
+       [0.05651046, 0.22247035, 0.49880481],
+       [0.66927114, 0.25809071, 0.86135104],
+       [0.65119529, 0.36884177, 0.15282377],
+       [0.51472689, 0.38937656, 0.4965313 ],
+       [0.58083604, 0.37753155, 0.59119962],
+       [0.35164399, 0.57164354, 0.8207419 ],
+       [0.6790161 , 0.38106536, 0.30264387],
+       [0.33941031, 0.6107606 , 0.6686472 ],
+       [0.33822983, 0.19861134, 0.43154284],
+       [0.29594891, 0.87240305, 0.52087484],
+       [0.27226593, 0.86075204, 0.4108819 ]])
+Coordinates:
+  * times    (times) float64 -1.0 -0.931 -0.8621 -0.7931 ... 0.8621 0.931 1.0
+  * roi      (roi) object &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39;
+*******************************************************************************
+</pre></div>
+</div>
+</section>
+<section id="xarray-slicing-and-indexing">
+<h2>Xarray slicing and indexing<a class="headerlink" href="#xarray-slicing-and-indexing" title="Permalink to this heading">#</a></h2>
+<p>Now we show how to slice the container</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># select a single specific ROI based on it&#39;s name</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="s1">&#39;roi_0&#39;</span><span class="p">)</span>
+
+<span class="c1"># select a time range</span>
+<span class="n">da_time_slice</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temporal selection : </span><span class="si">{</span><span class="n">da_time_slice</span><span class="o">.</span><span class="n">coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># off course, spatio-temporal selection is also supported</span>
+<span class="n">da_st</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">),</span> <span class="n">roi</span><span class="o">=</span><span class="s1">&#39;roi_1&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spatio-temporal selection : </span><span class="si">{</span><span class="n">da_st</span><span class="o">.</span><span class="n">coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># you can also slice according to indices</span>
+<span class="n">da_isel</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Integer selection : </span><span class="si">{</span><span class="n">da_isel</span><span class="o">.</span><span class="n">coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="mi">79</span><span class="p">)</span>
+
+<span class="c1"># however, if you want for example select multiple items based on their names,</span>
+<span class="c1"># you have to use booleans. Here&#39;s a small example that&#39;s using Pandas</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">roi</span><span class="o">.</span><span class="n">data</span>
+<span class="n">use_roi</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;roi_0&#39;</span><span class="p">,</span> <span class="s1">&#39;roi_2&#39;</span><span class="p">]</span>
+<span class="n">is_roi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">use_roi</span><span class="p">))</span>
+<span class="n">da_mi</span> <span class="o">=</span> <span class="n">da_data</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">roi</span><span class="o">=</span><span class="n">is_roi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multi-items selection : </span><span class="si">{</span><span class="n">da_mi</span><span class="o">.</span><span class="n">coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Temporal selection : Coordinates:
+  * times    (times) float64 -0.4483 -0.3793 -0.3103 ... 0.3103 0.3793 0.4483
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39;
+*******************************************************************************
+Spatio-temporal selection : Coordinates:
+  * times    (times) float64 -0.4483 -0.3793 -0.3103 ... 0.3103 0.3793 0.4483
+  * roi      (roi) &lt;U5 &#39;roi_1&#39; &#39;roi_1&#39;
+*******************************************************************************
+Integer selection : Coordinates:
+  * times    (times) float64 -0.3103 -0.2414 -0.1724 ... 0.1724 0.2414 0.3103
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39;
+*******************************************************************************
+Multi-items selection : Coordinates:
+  * times    (times) float64 -1.0 -0.931 -0.8621 -0.7931 ... 0.8621 0.931 1.0
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_2&#39; &#39;roi_0&#39; &#39;roi_2&#39; &#39;roi_0&#39;
+</pre></div>
+</div>
+</section>
+<section id="xarray-attributes">
+<h2>Xarray attributes<a class="headerlink" href="#xarray-attributes" title="Permalink to this heading">#</a></h2>
+<p>One of the nice features of DataArray is that it supporting setting
+attributes. Therefore you can add, for example, the parameters that describe
+your analysis</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding a few string attributes</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;inference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ffx&#39;</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;stats&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster-based&#39;</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Here&#39;s a small description of the analysis</span>
+<span class="s2">I&#39;m currently running. Trying to find a difference between condition 1. vs 2.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># you can also add vectors (but not arrays) to the attributes</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;vector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># however, &quot;None&quot; seems to pose a problem when saving the results. Therefore,</span>
+<span class="c1"># one quick way to solve this is simply to convert it into a string</span>
+<span class="n">da_data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;none_problem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">da_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (times: 30, roi: 7)&gt;
+array([[0.45250423, 0.81953048, 0.68086604, 0.13671123, 0.35727182,
+        0.69705263, 0.18550697],
+       [0.03348622, 0.60993492, 0.57175041, 0.44628991, 0.60917852,
+        0.32409775, 0.57827572],
+       [0.1745737 , 0.68033589, 0.3580109 , 0.76263188, 0.17549235,
+        0.29729328, 0.47052988],
+       [0.44484418, 0.15133033, 0.27449366, 0.60742285, 0.86630082,
+        0.54416071, 0.93129645],
+       [0.18373614, 0.5903104 , 0.35515531, 0.2989301 , 0.19236575,
+        0.63762854, 0.63306055],
+       [0.3281656 , 0.87692316, 0.84959453, 0.54985696, 0.83498028,
+        0.37108317, 0.20976327],
+       [0.47049288, 0.56452455, 0.10584779, 0.08250566, 0.72504829,
+        0.2737648 , 0.87159849],
+       [0.83923488, 0.59514662, 0.32759059, 0.2522432 , 0.38707588,
+        0.78638133, 0.02435129],
+       [0.52256746, 0.60323761, 0.54008351, 0.9237543 , 0.1594425 ,
+        0.19056107, 0.19126668],
+       [0.86825348, 0.78603006, 0.23996522, 0.64042716, 0.13678682,
+        0.8015636 , 0.88131854],
+...
+       [0.27072135, 0.1256662 , 0.90822865, 0.81374921, 0.39051523,
+        0.81447342, 0.92334286],
+       [0.56047253, 0.17418467, 0.24712609, 0.8671212 , 0.56349887,
+        0.05852145, 0.52599213],
+       [0.50294822, 0.33203095, 0.45564797, 0.90327296, 0.44672216,
+        0.53741464, 0.13795948],
+       [0.56662134, 0.49131709, 0.89062454, 0.29382485, 0.26374601,
+        0.2917747 , 0.88206192],
+       [0.04601255, 0.73168949, 0.64634379, 0.80054755, 0.41159759,
+        0.99514001, 0.20837187],
+       [0.8347184 , 0.42530164, 0.217003  , 0.2869445 , 0.33682909,
+        0.38828474, 0.91538539],
+       [0.64718667, 0.49830466, 0.65288199, 0.21431652, 0.72321654,
+        0.68441242, 0.15672775],
+       [0.20195569, 0.30838732, 0.73105151, 0.26092498, 0.08883536,
+        0.13203418, 0.55180883],
+       [0.2297453 , 0.93047633, 0.57148398, 0.39547661, 0.81432978,
+        0.47026569, 0.26262482],
+       [0.16014147, 0.86258383, 0.02874299, 0.51285796, 0.85892025,
+        0.79302081, 0.14379835]])
+Coordinates:
+  * times    (times) float64 -1.0 -0.931 -0.8621 -0.7931 ... 0.8621 0.931 1.0
+  * roi      (roi) &lt;U5 &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39; &#39;roi_1&#39; &#39;roi_2&#39; &#39;roi_0&#39;
+Attributes:
+    inference:     ffx
+    stats:         cluster-based
+    description:   Here&#39;s a small description of the analysis\nI&#39;m currently ...
+    vector:        [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 ...
+    none_problem:  None
+</pre></div>
+</div>
+</section>
+<section id="xarray-to-an-other-format">
+<h2>Xarray to an other format<a class="headerlink" href="#xarray-to-an-other-format" title="Permalink to this heading">#</a></h2>
+<p>Finally, we quickly illustrate how to convert a DataArray into, for example,
+a pandas.DataFrame</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">da_data</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>roi           roi_0     roi_1     roi_2     roi_0     roi_1     roi_2     roi_0
+times
+-1.000000  0.452504  0.819530  0.680866  0.136711  0.357272  0.697053  0.185507
+-0.931034  0.033486  0.609935  0.571750  0.446290  0.609179  0.324098  0.578276
+-0.862069  0.174574  0.680336  0.358011  0.762632  0.175492  0.297293  0.470530
+-0.793103  0.444844  0.151330  0.274494  0.607423  0.866301  0.544161  0.931296
+-0.724138  0.183736  0.590310  0.355155  0.298930  0.192366  0.637629  0.633061
+-0.655172  0.328166  0.876923  0.849595  0.549857  0.834980  0.371083  0.209763
+-0.586207  0.470493  0.564525  0.105848  0.082506  0.725048  0.273765  0.871598
+-0.517241  0.839235  0.595147  0.327591  0.252243  0.387076  0.786381  0.024351
+-0.448276  0.522567  0.603238  0.540084  0.923754  0.159443  0.190561  0.191267
+-0.379310  0.868253  0.786030  0.239965  0.640427  0.136787  0.801564  0.881319
+-0.310345  0.633122  0.709265  0.483099  0.189008  0.533214  0.115139  0.694610
+-0.241379  0.452350  0.407700  0.064877  0.603115  0.152312  0.968891  0.542996
+-0.172414  0.013112  0.392413  0.539875  0.500718  0.017010  0.720119  0.963253
+-0.103448  0.394916  0.807859  0.541632  0.097280  0.001697  0.056712  0.373229
+-0.034483  0.195498  0.896269  0.898990  0.946453  0.339452  0.737210  0.040275
+ 0.034483  0.570378  0.760258  0.172941  0.274468  0.171891  0.089723  0.438563
+ 0.103448  0.749470  0.846777  0.893988  0.583789  0.815039  0.425509  0.766269
+ 0.172414  0.818823  0.458062  0.081947  0.511368  0.628780  0.806290  0.162272
+ 0.241379  0.607081  0.859874  0.101915  0.802825  0.084635  0.147515  0.331996
+ 0.310345  0.076329  0.399032  0.598178  0.049868  0.045909  0.399431  0.043335
+ 0.379310  0.270721  0.125666  0.908229  0.813749  0.390515  0.814473  0.923343
+ 0.448276  0.560473  0.174185  0.247126  0.867121  0.563499  0.058521  0.525992
+ 0.517241  0.502948  0.332031  0.455648  0.903273  0.446722  0.537415  0.137959
+ 0.586207  0.566621  0.491317  0.890625  0.293825  0.263746  0.291775  0.882062
+ 0.655172  0.046013  0.731689  0.646344  0.800548  0.411598  0.995140  0.208372
+ 0.724138  0.834718  0.425302  0.217003  0.286944  0.336829  0.388285  0.915385
+ 0.793103  0.647187  0.498305  0.652882  0.214317  0.723217  0.684412  0.156728
+ 0.862069  0.201956  0.308387  0.731052  0.260925  0.088835  0.132034  0.551809
+ 0.931034  0.229745  0.930476  0.571484  0.395477  0.814330  0.470266  0.262625
+ 1.000000  0.160141  0.862584  0.028743  0.512858  0.858920  0.793021  0.143798
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.864 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  395 MB</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-xarray-plot-xr-quick-tour-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7fc6e441ed2ae25abc7801fb230aef71/plot_xr_quick_tour.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_xr_quick_tour.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/2429c724f306f4b7e43ba3bc570cef2f/plot_xr_quick_tour.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_xr_quick_tour.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/4c175cbc74f7b2febf5cfece3ca816e7/plot_xr_quick_tour.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_xr_quick_tour.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_xr_export.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Xarray : Saving the results</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-data">Simulate data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-conversion-and-access-to-the-internal-components">Xarray conversion and access to the internal components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-slicing-and-indexing">Xarray slicing and indexing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-attributes">Xarray attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-to-an-other-format">Xarray to an other format</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

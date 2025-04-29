@@ -1,0 +1,1441 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Define an electrophysiological dataset using Xarray &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/dataset/plot_dataset_xarray';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Group-level statistics on measures of information" href="../mi/index.html" />
+    <link rel="prev" title="Build an electrophysiological dataset" href="plot_dataset_ephy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_dfc_estimator.html">Estimate the Dynamic Functional Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/plot_stim_spec_network.html">Statistical analysis of a stimulus-specific network</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Multi-subjects dataset</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_dataset_mne.html">Define an electrophysiological dataset using MNE-Python structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_dataset_ephy.html">Build an electrophysiological dataset</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Define an electrophysiological dataset using Xarray</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mi/index.html">Group-level statistics on measures of information</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_ccd.html">MI between two continuous variables conditioned by a discret one</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cd.html">MI between a continuous and a discret variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_cc.html">MI between two continuous variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_time_frequency.html">Compute MI across time and frequencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_combine.html">Investigate relation of order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_mi_conjunction.html">Compute a conjunction analysis on mutual-information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mi/plot_wf_mi_contact_level.html">Mutual-information at the contact level</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../estimators/index.html">Information-based estimators</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_resample.html">Trial-resampling: correcting for unbalanced designs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_custom.html">Defining a custom estimator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../estimators/plot_est_comparison.html">Estimator comparison</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../conn/index.html">Connectivity and Information Transfer</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_fit.html">FIT: Feature specific information transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_pid.html">PID: Decomposing the information carried by pairs of brain regions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_dfc.html">Estimate dynamic functional connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ii.html">Estimate interaction information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_conn.html">Estimate comodulations between brain areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_ccf.html">Lag estimation between delayed times-series using the cross-correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../conn/plot_covgc.html">Estimate the covariance-based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../armodel/index.html">Autoregressive model</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_pairwise.html">AR : pairwise illustration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_instantaneous.html">AR : simulate common driving input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../armodel/plot_ar_condcovgc.html">AR : conditional covariance based Granger Causality</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utility</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/plot_time_windows.html">Define temporal windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../statistics/index.html">Statistics</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_ffx.html">Compare within-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_wf_mi_stats_compare_rfx.html">Compare between-subjects statistics when computing mutual information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../statistics/plot_ci_cc.html">Estimate the empirical confidence interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../simulations/index.html">Simulations</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_generate_random_data.html">Generate random electrophysiological data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulations/plot_ground_truth.html">Generate spatio-temporal ground-truths</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../performance/index.html">Performance</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../performance/plot_vector_vs_tensor.html">Comparison between tensor and vector based computations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../xarray/index.html">Xarray</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../xarray/plot_xr_export.html">Xarray : Saving the results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../xarray/plot_xr_quick_tour.html">Xarray : Quick tour</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Examples</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Multi-subjects dataset</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Define an...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-dataset-plot-dataset-xarray-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="define-an-electrophysiological-dataset-using-xarray">
+<span id="sphx-glr-auto-examples-dataset-plot-dataset-xarray-py"></span><h1>Define an electrophysiological dataset using Xarray<a class="headerlink" href="#define-an-electrophysiological-dataset-using-xarray" title="Permalink to this heading">#</a></h1>
+<p>This example illustrates how to define a dataset using Xarray. If you don’t
+know this library, we can simplify by saying that it provides containers that
+accept arrays but you can also labelize your dimensions. Another way of seeing
+it, pandas is mostly made for tables (i.e 2D arrays) while Xarray provide
+almost the same functionalities but for multi-dimensional arrays.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataArray</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">frites.dataset</span><span class="w"> </span><span class="kn">import</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class"><span class="n">DatasetEphy</span></a>
+<span class="kn">from</span><span class="w"> </span><span class="nn">frites</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_mpl_style</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">set_mpl_style</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="create-artificial-data">
+<h2>Create artificial data<a class="headerlink" href="#create-artificial-data" title="Permalink to this heading">#</a></h2>
+<p>We start by creating some random data for several subjects. To do that, each
+subject is going have a 3 dimensional array of shape
+(n_epochs, n_channels, n_times). Then, all of the arrays are grouped together
+in a list of length (n_subjects,)</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">n_subjects</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+    <span class="c1"># generate single subject data</span>
+    <span class="n">x_suj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_channels</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
+    <span class="c1"># generate some random channel names</span>
+    <span class="n">ch_suj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;ch_</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">)])</span>
+    <span class="c1"># concatenate in a list</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_suj</span><span class="p">)</span>
+    <span class="n">ch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch_suj</span><span class="p">)</span>
+<span class="c1"># finally lets create a time vector</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span> <span class="o">/</span> <span class="n">sf</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="xarray-conversion-to-dataarray">
+<h2>Xarray conversion to DataArray<a class="headerlink" href="#xarray-conversion-to-dataarray" title="Permalink to this heading">#</a></h2>
+<p>Here, we convert the NumPy arrays to xarray.DataArray</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">x_xr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+    <span class="c1"># DataArray conversion</span>
+    <span class="n">arr_xr</span> <span class="o">=</span> <span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;epochs&#39;</span><span class="p">,</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span> <span class="s1">&#39;times&#39;</span><span class="p">),</span>
+                       <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">ch</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">times</span><span class="p">))</span>
+    <span class="c1"># finally, replace it in the original list</span>
+    <span class="n">x_xr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr_xr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (epochs: 10, channels: 5, times: 100)&gt;
+array([[[4.30008581e-01, 4.15619327e-01, 8.97145491e-01, ...,
+         8.55757189e-01, 7.59507621e-01, 6.01747707e-01],
+        [4.02573102e-01, 1.97828239e-01, 5.37139008e-01, ...,
+         7.22666646e-01, 9.64066936e-02, 9.28621072e-02],
+        [4.49673129e-01, 2.16219113e-03, 7.54797779e-01, ...,
+         5.84479083e-02, 7.13079108e-01, 9.06147441e-01],
+        [5.51751917e-02, 6.86199079e-01, 5.83072825e-01, ...,
+         4.32877614e-01, 3.04843236e-01, 9.90082998e-02],
+        [7.10332224e-01, 1.66541040e-01, 4.79279965e-01, ...,
+         4.02772711e-01, 5.79732869e-01, 4.55569592e-01]],
+
+       [[4.42653653e-02, 6.25589536e-01, 5.42576396e-01, ...,
+         3.63802376e-01, 3.60585380e-01, 1.48582786e-01],
+        [1.69032542e-01, 7.05612502e-01, 2.68142230e-01, ...,
+         1.87627439e-01, 3.43634152e-01, 9.07068918e-01],
+        [1.33953239e-01, 7.25917385e-02, 9.79412500e-01, ...,
+         8.84689139e-04, 1.68531356e-01, 6.95919895e-01],
+        [9.74397033e-01, 5.62802608e-01, 8.99226653e-01, ...,
+         6.07992950e-01, 9.96455361e-01, 5.26676247e-01],
+        [3.18727564e-01, 5.45024319e-01, 8.47879462e-01, ...,
+...
+         7.42579340e-01, 6.94069768e-01, 1.63560913e-02],
+        [2.71233272e-01, 2.42853502e-01, 4.28530018e-01, ...,
+         3.37794144e-02, 8.39410105e-02, 3.97082427e-01],
+        [7.11755955e-01, 8.27479920e-01, 4.23932500e-01, ...,
+         5.32398555e-01, 4.05543934e-02, 1.77295659e-01],
+        [4.75732969e-01, 5.30331741e-02, 4.49995004e-01, ...,
+         8.18620214e-02, 6.39047089e-01, 8.78680437e-01],
+        [1.23442276e-01, 5.43527659e-01, 2.42839586e-02, ...,
+         5.09528262e-01, 7.31521327e-01, 9.86438075e-01]],
+
+       [[1.81666507e-02, 1.13056264e-01, 4.09512525e-01, ...,
+         1.36661335e-01, 1.56284832e-01, 9.49422564e-01],
+        [6.60434418e-02, 3.53363148e-01, 5.15162443e-01, ...,
+         9.11941959e-01, 2.97756640e-01, 1.33746518e-01],
+        [3.54040444e-01, 3.04852266e-01, 1.96269968e-01, ...,
+         7.63964864e-01, 6.96044342e-01, 2.63218272e-01],
+        [8.28104642e-01, 4.62469735e-01, 6.10613807e-01, ...,
+         4.81611330e-01, 4.72313149e-01, 2.53627297e-01],
+        [2.44161830e-01, 4.55406466e-01, 2.79696627e-01, ...,
+         9.38663277e-01, 3.84363188e-01, 7.05822369e-01]]])
+Coordinates:
+  * epochs    (epochs) int64 0 1 2 3 4 5 6 7 8 9
+  * channels  (channels) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+  * times     (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+</pre></div>
+</div>
+</section>
+<section id="build-the-dataset">
+<h2>Build the dataset<a class="headerlink" href="#build-the-dataset" title="Permalink to this heading">#</a></h2>
+<p>Finally, we pass the data to the <a class="reference internal" href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy"><code class="xref py py-class docutils literal notranslate"><span class="pre">frites.dataset.DatasetEphy</span></code></a> class
+in order to create the dataset</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># here, we specify to the DatasetEphy class that the roi dimension is actually</span>
+<span class="c1"># called &#39;channels&#39; in the DataArray and the times dimension is called &#39;times&#39;</span>
+<a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a> <span class="o">=</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class"><span class="n">DatasetEphy</span></a><span class="p">(</span><span class="n">x_xr</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="s1">&#39;channels&#39;</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="s1">&#39;times&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time vector : &#39;</span><span class="p">,</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.times" title="frites.dataset.DatasetEphy.times" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">times</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROI</span><span class="se">\n</span><span class="s1">: &#39;</span><span class="p">,</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy.df_rs" title="frites.dataset.DatasetEphy.df_rs" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-property"><span class="n">dt</span><span class="o">.</span><span class="n">df_rs</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray &#39;subject_0&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[4.30008581e-01, 4.15619327e-01, 8.97145491e-01, ...,
+         8.55757189e-01, 7.59507621e-01, 6.01747707e-01],
+        [4.02573102e-01, 1.97828239e-01, 5.37139008e-01, ...,
+         7.22666646e-01, 9.64066936e-02, 9.28621072e-02],
+        [4.49673129e-01, 2.16219113e-03, 7.54797779e-01, ...,
+         5.84479083e-02, 7.13079108e-01, 9.06147441e-01],
+        [5.51751917e-02, 6.86199079e-01, 5.83072825e-01, ...,
+         4.32877614e-01, 3.04843236e-01, 9.90082998e-02],
+        [7.10332224e-01, 1.66541040e-01, 4.79279965e-01, ...,
+         4.02772711e-01, 5.79732869e-01, 4.55569592e-01]],
+
+       [[4.42653653e-02, 6.25589536e-01, 5.42576396e-01, ...,
+         3.63802376e-01, 3.60585380e-01, 1.48582786e-01],
+        [1.69032542e-01, 7.05612502e-01, 2.68142230e-01, ...,
+         1.87627439e-01, 3.43634152e-01, 9.07068918e-01],
+        [1.33953239e-01, 7.25917385e-02, 9.79412500e-01, ...,
+         8.84689139e-04, 1.68531356e-01, 6.95919895e-01],
+        [9.74397033e-01, 5.62802608e-01, 8.99226653e-01, ...,
+         6.07992950e-01, 9.96455361e-01, 5.26676247e-01],
+        [3.18727564e-01, 5.45024319e-01, 8.47879462e-01, ...,
+...
+         7.42579340e-01, 6.94069768e-01, 1.63560913e-02],
+        [2.71233272e-01, 2.42853502e-01, 4.28530018e-01, ...,
+         3.37794144e-02, 8.39410105e-02, 3.97082427e-01],
+        [7.11755955e-01, 8.27479920e-01, 4.23932500e-01, ...,
+         5.32398555e-01, 4.05543934e-02, 1.77295659e-01],
+        [4.75732969e-01, 5.30331741e-02, 4.49995004e-01, ...,
+         8.18620214e-02, 6.39047089e-01, 8.78680437e-01],
+        [1.23442276e-01, 5.43527659e-01, 2.42839586e-02, ...,
+         5.09528262e-01, 7.31521327e-01, 9.86438075e-01]],
+
+       [[1.81666507e-02, 1.13056264e-01, 4.09512525e-01, ...,
+         1.36661335e-01, 1.56284832e-01, 9.49422564e-01],
+        [6.60434418e-02, 3.53363148e-01, 5.15162443e-01, ...,
+         9.11941959e-01, 2.97756640e-01, 1.33746518e-01],
+        [3.54040444e-01, 3.04852266e-01, 1.96269968e-01, ...,
+         7.63964864e-01, 6.96044342e-01, 2.63218272e-01],
+        [8.28104642e-01, 4.62469735e-01, 6.10613807e-01, ...,
+         4.81611330e-01, 4.72313149e-01, 2.53627297e-01],
+        [2.44161830e-01, 4.55406466e-01, 2.79696627e-01, ...,
+         9.38663277e-01, 3.84363188e-01, 7.05822369e-01]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 0 0 0 0 0 0 0 0 0 0
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_1&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.11928999, 0.52618525, 0.1269329 , ..., 0.43542025,
+         0.01777982, 0.86024913],
+        [0.04195896, 0.76269211, 0.07286539, ..., 0.47600079,
+         0.7127555 , 0.8185346 ],
+        [0.75214272, 0.39270629, 0.57258749, ..., 0.85279663,
+         0.27334737, 0.5835292 ],
+        [0.31117365, 0.80379896, 0.39240379, ..., 0.56765811,
+         0.65457514, 0.79160714],
+        [0.84410288, 0.05874125, 0.35772784, ..., 0.24846727,
+         0.86705291, 0.11126956]],
+
+       [[0.56571765, 0.31572435, 0.00228454, ..., 0.65429404,
+         0.78269457, 0.91066937],
+        [0.68297909, 0.51570707, 0.15465983, ..., 0.99604268,
+         0.77917695, 0.85680089],
+        [0.36828647, 0.16288634, 0.31779514, ..., 0.45992761,
+         0.96891307, 0.94530682],
+        [0.67823772, 0.75737861, 0.9682205 , ..., 0.2577613 ,
+         0.26592108, 0.3656392 ],
+        [0.68707087, 0.40793532, 0.85120588, ..., 0.42044553,
+...
+         0.99267846, 0.87307804],
+        [0.3715323 , 0.33442063, 0.61211934, ..., 0.81183621,
+         0.26675029, 0.05376418],
+        [0.07408775, 0.46635269, 0.84369904, ..., 0.75604235,
+         0.12462772, 0.62275252],
+        [0.52300034, 0.52183708, 0.71067454, ..., 0.55096305,
+         0.30933686, 0.10933034],
+        [0.48531365, 0.50578056, 0.68892731, ..., 0.62669821,
+         0.28354695, 0.63785965]],
+
+       [[0.11784489, 0.27841905, 0.86564685, ..., 0.93935605,
+         0.57069434, 0.87304802],
+        [0.27614432, 0.05458362, 0.20360945, ..., 0.59174349,
+         0.27716257, 0.62411018],
+        [0.26398572, 0.8130729 , 0.11523605, ..., 0.50230037,
+         0.55251583, 0.43443558],
+        [0.4158952 , 0.95302152, 0.91040658, ..., 0.83558555,
+         0.4134908 , 0.95575555],
+        [0.35729684, 0.82486333, 0.71743575, ..., 0.83589958,
+         0.64293541, 0.07556001]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 1 1 1 1 1 1 1 1 1 1
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_2&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.91948695, 0.87979538, 0.79281291, ..., 0.82263166,
+         0.92349852, 0.64741517],
+        [0.74029803, 0.68089148, 0.23847544, ..., 0.96049495,
+         0.91139698, 0.0852222 ],
+        [0.06195706, 0.50751781, 0.02717379, ..., 0.96101482,
+         0.67725388, 0.98765984],
+        [0.27896102, 0.34642859, 0.12684912, ..., 0.78485668,
+         0.36077026, 0.23479245],
+        [0.78552317, 0.1281671 , 0.80580504, ..., 0.61991236,
+         0.08161449, 0.07320001]],
+
+       [[0.29114134, 0.26134147, 0.68072373, ..., 0.79293835,
+         0.76346626, 0.6600864 ],
+        [0.2380412 , 0.55981534, 0.82065207, ..., 0.63367644,
+         0.10015319, 0.35899084],
+        [0.37397522, 0.83304634, 0.52126711, ..., 0.20324482,
+         0.37542584, 0.997347  ],
+        [0.83454822, 0.16800315, 0.64732877, ..., 0.18370469,
+         0.0258599 , 0.4788021 ],
+        [0.61807283, 0.6953434 , 0.30728251, ..., 0.19432944,
+...
+         0.9224637 , 0.63125157],
+        [0.55708516, 0.87784986, 0.37966677, ..., 0.9632567 ,
+         0.21915866, 0.00457697],
+        [0.49752683, 0.17981057, 0.57013578, ..., 0.45255511,
+         0.725804  , 0.1114034 ],
+        [0.83133338, 0.09896551, 0.11999966, ..., 0.28314694,
+         0.58339661, 0.33079066],
+        [0.11909597, 0.34758649, 0.10550889, ..., 0.97560088,
+         0.5777897 , 0.42748875]],
+
+       [[0.03267569, 0.61950707, 0.64991809, ..., 0.71811551,
+         0.3099583 , 0.52742885],
+        [0.11269014, 0.44404203, 0.07050745, ..., 0.73059958,
+         0.21967989, 0.03593816],
+        [0.64056715, 0.26810605, 0.19728428, ..., 0.77406934,
+         0.8526119 , 0.90081977],
+        [0.77515231, 0.86759694, 0.63609906, ..., 0.79314501,
+         0.9176867 , 0.37723888],
+        [0.31401674, 0.41066661, 0.4381768 , ..., 0.41852247,
+         0.31735248, 0.79469672]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 2 2 2 2 2 2 2 2 2 2
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_3&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.43004538, 0.65614089, 0.13284507, ..., 0.16816806,
+         0.33979741, 0.37546796],
+        [0.70255806, 0.78549951, 0.08647421, ..., 0.36036255,
+         0.00245529, 0.55037426],
+        [0.50360901, 0.84320302, 0.69687019, ..., 0.08969652,
+         0.95284688, 0.39686039],
+        [0.18588025, 0.25937333, 0.22517591, ..., 0.08456359,
+         0.29593196, 0.97353069],
+        [0.64624918, 0.05814698, 0.21607716, ..., 0.70918007,
+         0.76225478, 0.66491777]],
+
+       [[0.46265872, 0.35913096, 0.16493715, ..., 0.84188051,
+         0.93837826, 0.86643623],
+        [0.95134456, 0.09031157, 0.75450837, ..., 0.06485132,
+         0.2687475 , 0.96743844],
+        [0.17654793, 0.44472352, 0.91355439, ..., 0.58816824,
+         0.02522253, 0.28955094],
+        [0.7819593 , 0.7743504 , 0.94428168, ..., 0.77961091,
+         0.65580837, 0.55473179],
+        [0.63224248, 0.40365546, 0.74860973, ..., 0.75569197,
+...
+         0.34429112, 0.02805752],
+        [0.7131015 , 0.04315035, 0.87821316, ..., 0.61443466,
+         0.81192817, 0.54860817],
+        [0.79701442, 0.70784575, 0.36757337, ..., 0.91409791,
+         0.00200909, 0.71946715],
+        [0.37660624, 0.60205987, 0.90814293, ..., 0.87080868,
+         0.1424463 , 0.90913818],
+        [0.94780456, 0.63795864, 0.14539284, ..., 0.53113956,
+         0.82708304, 0.8529294 ]],
+
+       [[0.57654435, 0.03810384, 0.86381878, ..., 0.58978081,
+         0.50967147, 0.62782527],
+        [0.40155199, 0.88181222, 0.09689691, ..., 0.81137492,
+         0.37524963, 0.91177733],
+        [0.4087309 , 0.98467908, 0.94713449, ..., 0.68061051,
+         0.6589184 , 0.03143535],
+        [0.58335109, 0.61492765, 0.72611378, ..., 0.52935148,
+         0.67717479, 0.08073243],
+        [0.4694373 , 0.71561275, 0.29705791, ..., 0.51541419,
+         0.2558448 , 0.17006528]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 3 3 3 3 3 3 3 3 3 3
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_4&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.81060687, 0.06395865, 0.93834251, ..., 0.38458425,
+         0.33503571, 0.35213913],
+        [0.9728364 , 0.22333399, 0.51167532, ..., 0.23949269,
+         0.12319338, 0.67722901],
+        [0.65227237, 0.63854027, 0.20061244, ..., 0.32318281,
+         0.96644307, 0.37664041],
+        [0.25948739, 0.00694006, 0.29042107, ..., 0.78536757,
+         0.37503725, 0.72966275],
+        [0.32831335, 0.71420023, 0.89184502, ..., 0.2454904 ,
+         0.04527967, 0.35549081]],
+
+       [[0.67116019, 0.88330395, 0.79450572, ..., 0.67184612,
+         0.05460093, 0.14406935],
+        [0.38628614, 0.42851805, 0.74168145, ..., 0.08240887,
+         0.9857575 , 0.77432535],
+        [0.14615664, 0.37525907, 0.46117555, ..., 0.85307356,
+         0.85050297, 0.34925627],
+        [0.30121031, 0.92883483, 0.04915563, ..., 0.94363192,
+         0.83600807, 0.97264693],
+        [0.61594377, 0.56711937, 0.07108376, ..., 0.32221322,
+...
+         0.40183786, 0.17538522],
+        [0.79461588, 0.94227847, 0.24801076, ..., 0.74271852,
+         0.52351185, 0.31655994],
+        [0.51511617, 0.16578703, 0.51492142, ..., 0.65666036,
+         0.51381209, 0.21136769],
+        [0.62106923, 0.90611925, 0.58828558, ..., 0.56307889,
+         0.6740868 , 0.49002678],
+        [0.10904393, 0.19411827, 0.21737293, ..., 0.13419232,
+         0.62989886, 0.19977215]],
+
+       [[0.52818457, 0.61406642, 0.48828433, ..., 0.99444816,
+         0.40827414, 0.95696391],
+        [0.94988824, 0.86420457, 0.64538879, ..., 0.59625007,
+         0.10451909, 0.97635364],
+        [0.48001973, 0.03687578, 0.80113744, ..., 0.98693827,
+         0.80515945, 0.2371893 ],
+        [0.98858328, 0.8495341 , 0.486449  , ..., 0.54092701,
+         0.9243252 , 0.06330291],
+        [0.66754356, 0.48554682, 0.72044128, ..., 0.31882968,
+         0.90538804, 0.72165753]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 4 4 4 4 4 4 4 4 4 4
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       none
+    z_dtype:       none
+    mi_type:       none
+    mi_repr:       none
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+Time vector :  [0.         0.00195312 0.00390625 0.00585938 0.0078125  0.00976562
+ 0.01171875 0.01367188 0.015625   0.01757812 0.01953125 0.02148438
+ 0.0234375  0.02539062 0.02734375 0.02929688 0.03125    0.03320312
+ 0.03515625 0.03710938 0.0390625  0.04101562 0.04296875 0.04492188
+ 0.046875   0.04882812 0.05078125 0.05273438 0.0546875  0.05664062
+ 0.05859375 0.06054688 0.0625     0.06445312 0.06640625 0.06835938
+ 0.0703125  0.07226562 0.07421875 0.07617188 0.078125   0.08007812
+ 0.08203125 0.08398438 0.0859375  0.08789062 0.08984375 0.09179688
+ 0.09375    0.09570312 0.09765625 0.09960938 0.1015625  0.10351562
+ 0.10546875 0.10742188 0.109375   0.11132812 0.11328125 0.11523438
+ 0.1171875  0.11914062 0.12109375 0.12304688 0.125      0.12695312
+ 0.12890625 0.13085938 0.1328125  0.13476562 0.13671875 0.13867188
+ 0.140625   0.14257812 0.14453125 0.14648438 0.1484375  0.15039062
+ 0.15234375 0.15429688 0.15625    0.15820312 0.16015625 0.16210938
+ 0.1640625  0.16601562 0.16796875 0.16992188 0.171875   0.17382812
+ 0.17578125 0.17773438 0.1796875  0.18164062 0.18359375 0.18554688
+ 0.1875     0.18945312 0.19140625 0.19335938]
+ROI
+:        #subjects         subjects  keep
+roi
+ch_0          5  [0, 1, 2, 3, 4]  True
+ch_1          5  [0, 1, 2, 3, 4]  True
+ch_2          5  [0, 1, 2, 3, 4]  True
+ch_3          5  [0, 1, 2, 3, 4]  True
+ch_4          5  [0, 1, 2, 3, 4]  True
+</pre></div>
+</div>
+</section>
+<section id="multiindex-support">
+<h2>MultiIndex support<a class="headerlink" href="#multiindex-support" title="Permalink to this heading">#</a></h2>
+<p>DataArray also supports multi-indexing of a single dimension.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a continuous regressor (prediction error, delta P etc.)</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">n_epochs</span><span class="p">,))</span>
+<span class="c1"># create a discret variable (e.g experimental conditions)</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># now, create a multi-index using pandas</span>
+<span class="n">midx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">((</span><span class="n">dp</span><span class="p">,</span> <span class="n">cond</span><span class="p">),</span> <span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;blocks&#39;</span><span class="p">))</span>
+
+<span class="c1"># convert again the original arrays but this time, the epoch dimension is going</span>
+<span class="c1"># to be a multi-index</span>
+<span class="n">x_xr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+    <span class="c1"># DataArray conversion</span>
+    <span class="n">arr_xr</span> <span class="o">=</span> <span class="n">DataArray</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;epochs&#39;</span><span class="p">,</span> <span class="s1">&#39;channels&#39;</span><span class="p">,</span> <span class="s1">&#39;times&#39;</span><span class="p">),</span>
+                       <span class="n">coords</span><span class="o">=</span><span class="p">(</span><span class="n">midx</span><span class="p">,</span> <span class="n">ch</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">times</span><span class="p">))</span>
+    <span class="c1"># finally, replace it in the original list</span>
+    <span class="n">x_xr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr_xr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># finally, when you create your dataset you can also specify the y and z inputs</span>
+<span class="c1"># by providing their names in the DataArray</span>
+<a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a> <span class="o">=</span> <a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class"><span class="n">DatasetEphy</span></a><span class="p">(</span><span class="n">x_xr</span><span class="p">,</span> <span class="n">roi</span><span class="o">=</span><span class="s1">&#39;channels&#39;</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="s1">&#39;times&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="s1">&#39;blocks&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><a href="../../api/generated/frites.dataset.DatasetEphy.html#frites.dataset.DatasetEphy" title="frites.dataset.DatasetEphy" class="sphx-glr-backref-module-frites-dataset sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">dt</span></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;xarray.DataArray (epochs: 10, channels: 5, times: 100)&gt;
+array([[[4.30008581e-01, 4.15619327e-01, 8.97145491e-01, ...,
+         8.55757189e-01, 7.59507621e-01, 6.01747707e-01],
+        [4.02573102e-01, 1.97828239e-01, 5.37139008e-01, ...,
+         7.22666646e-01, 9.64066936e-02, 9.28621072e-02],
+        [4.49673129e-01, 2.16219113e-03, 7.54797779e-01, ...,
+         5.84479083e-02, 7.13079108e-01, 9.06147441e-01],
+        [5.51751917e-02, 6.86199079e-01, 5.83072825e-01, ...,
+         4.32877614e-01, 3.04843236e-01, 9.90082998e-02],
+        [7.10332224e-01, 1.66541040e-01, 4.79279965e-01, ...,
+         4.02772711e-01, 5.79732869e-01, 4.55569592e-01]],
+
+       [[4.42653653e-02, 6.25589536e-01, 5.42576396e-01, ...,
+         3.63802376e-01, 3.60585380e-01, 1.48582786e-01],
+        [1.69032542e-01, 7.05612502e-01, 2.68142230e-01, ...,
+         1.87627439e-01, 3.43634152e-01, 9.07068918e-01],
+        [1.33953239e-01, 7.25917385e-02, 9.79412500e-01, ...,
+         8.84689139e-04, 1.68531356e-01, 6.95919895e-01],
+        [9.74397033e-01, 5.62802608e-01, 8.99226653e-01, ...,
+         6.07992950e-01, 9.96455361e-01, 5.26676247e-01],
+        [3.18727564e-01, 5.45024319e-01, 8.47879462e-01, ...,
+...
+         7.42579340e-01, 6.94069768e-01, 1.63560913e-02],
+        [2.71233272e-01, 2.42853502e-01, 4.28530018e-01, ...,
+         3.37794144e-02, 8.39410105e-02, 3.97082427e-01],
+        [7.11755955e-01, 8.27479920e-01, 4.23932500e-01, ...,
+         5.32398555e-01, 4.05543934e-02, 1.77295659e-01],
+        [4.75732969e-01, 5.30331741e-02, 4.49995004e-01, ...,
+         8.18620214e-02, 6.39047089e-01, 8.78680437e-01],
+        [1.23442276e-01, 5.43527659e-01, 2.42839586e-02, ...,
+         5.09528262e-01, 7.31521327e-01, 9.86438075e-01]],
+
+       [[1.81666507e-02, 1.13056264e-01, 4.09512525e-01, ...,
+         1.36661335e-01, 1.56284832e-01, 9.49422564e-01],
+        [6.60434418e-02, 3.53363148e-01, 5.15162443e-01, ...,
+         9.11941959e-01, 2.97756640e-01, 1.33746518e-01],
+        [3.54040444e-01, 3.04852266e-01, 1.96269968e-01, ...,
+         7.63964864e-01, 6.96044342e-01, 2.63218272e-01],
+        [8.28104642e-01, 4.62469735e-01, 6.10613807e-01, ...,
+         4.81611330e-01, 4.72313149e-01, 2.53627297e-01],
+        [2.44161830e-01, 4.55406466e-01, 2.79696627e-01, ...,
+         9.38663277e-01, 3.84363188e-01, 7.05822369e-01]]])
+Coordinates:
+  * epochs    (epochs) object MultiIndex
+  * dp        (epochs) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+  * blocks    (epochs) int64 0 0 0 0 0 1 1 1 1 1
+  * channels  (channels) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+  * times     (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+&lt;xarray.DataArray &#39;subject_0&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[4.30008581e-01, 4.15619327e-01, 8.97145491e-01, ...,
+         8.55757189e-01, 7.59507621e-01, 6.01747707e-01],
+        [4.02573102e-01, 1.97828239e-01, 5.37139008e-01, ...,
+         7.22666646e-01, 9.64066936e-02, 9.28621072e-02],
+        [4.49673129e-01, 2.16219113e-03, 7.54797779e-01, ...,
+         5.84479083e-02, 7.13079108e-01, 9.06147441e-01],
+        [5.51751917e-02, 6.86199079e-01, 5.83072825e-01, ...,
+         4.32877614e-01, 3.04843236e-01, 9.90082998e-02],
+        [7.10332224e-01, 1.66541040e-01, 4.79279965e-01, ...,
+         4.02772711e-01, 5.79732869e-01, 4.55569592e-01]],
+
+       [[4.42653653e-02, 6.25589536e-01, 5.42576396e-01, ...,
+         3.63802376e-01, 3.60585380e-01, 1.48582786e-01],
+        [1.69032542e-01, 7.05612502e-01, 2.68142230e-01, ...,
+         1.87627439e-01, 3.43634152e-01, 9.07068918e-01],
+        [1.33953239e-01, 7.25917385e-02, 9.79412500e-01, ...,
+         8.84689139e-04, 1.68531356e-01, 6.95919895e-01],
+        [9.74397033e-01, 5.62802608e-01, 8.99226653e-01, ...,
+         6.07992950e-01, 9.96455361e-01, 5.26676247e-01],
+        [3.18727564e-01, 5.45024319e-01, 8.47879462e-01, ...,
+...
+         7.42579340e-01, 6.94069768e-01, 1.63560913e-02],
+        [2.71233272e-01, 2.42853502e-01, 4.28530018e-01, ...,
+         3.37794144e-02, 8.39410105e-02, 3.97082427e-01],
+        [7.11755955e-01, 8.27479920e-01, 4.23932500e-01, ...,
+         5.32398555e-01, 4.05543934e-02, 1.77295659e-01],
+        [4.75732969e-01, 5.30331741e-02, 4.49995004e-01, ...,
+         8.18620214e-02, 6.39047089e-01, 8.78680437e-01],
+        [1.23442276e-01, 5.43527659e-01, 2.42839586e-02, ...,
+         5.09528262e-01, 7.31521327e-01, 9.86438075e-01]],
+
+       [[1.81666507e-02, 1.13056264e-01, 4.09512525e-01, ...,
+         1.36661335e-01, 1.56284832e-01, 9.49422564e-01],
+        [6.60434418e-02, 3.53363148e-01, 5.15162443e-01, ...,
+         9.11941959e-01, 2.97756640e-01, 1.33746518e-01],
+        [3.54040444e-01, 3.04852266e-01, 1.96269968e-01, ...,
+         7.63964864e-01, 6.96044342e-01, 2.63218272e-01],
+        [8.28104642e-01, 4.62469735e-01, 6.10613807e-01, ...,
+         4.81611330e-01, 4.72313149e-01, 2.53627297e-01],
+        [2.44161830e-01, 4.55406466e-01, 2.79696627e-01, ...,
+         9.38663277e-01, 3.84363188e-01, 7.05822369e-01]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+    y        (trials) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+    z        (trials) int64 0 0 0 0 0 1 1 1 1 1
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 0 0 0 0 0 0 0 0 0 0
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       float
+    z_dtype:       int
+    mi_type:       ccd
+    mi_repr:       I(x; y (continuous)) | z (discret)
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_1&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.11928999, 0.52618525, 0.1269329 , ..., 0.43542025,
+         0.01777982, 0.86024913],
+        [0.04195896, 0.76269211, 0.07286539, ..., 0.47600079,
+         0.7127555 , 0.8185346 ],
+        [0.75214272, 0.39270629, 0.57258749, ..., 0.85279663,
+         0.27334737, 0.5835292 ],
+        [0.31117365, 0.80379896, 0.39240379, ..., 0.56765811,
+         0.65457514, 0.79160714],
+        [0.84410288, 0.05874125, 0.35772784, ..., 0.24846727,
+         0.86705291, 0.11126956]],
+
+       [[0.56571765, 0.31572435, 0.00228454, ..., 0.65429404,
+         0.78269457, 0.91066937],
+        [0.68297909, 0.51570707, 0.15465983, ..., 0.99604268,
+         0.77917695, 0.85680089],
+        [0.36828647, 0.16288634, 0.31779514, ..., 0.45992761,
+         0.96891307, 0.94530682],
+        [0.67823772, 0.75737861, 0.9682205 , ..., 0.2577613 ,
+         0.26592108, 0.3656392 ],
+        [0.68707087, 0.40793532, 0.85120588, ..., 0.42044553,
+...
+         0.99267846, 0.87307804],
+        [0.3715323 , 0.33442063, 0.61211934, ..., 0.81183621,
+         0.26675029, 0.05376418],
+        [0.07408775, 0.46635269, 0.84369904, ..., 0.75604235,
+         0.12462772, 0.62275252],
+        [0.52300034, 0.52183708, 0.71067454, ..., 0.55096305,
+         0.30933686, 0.10933034],
+        [0.48531365, 0.50578056, 0.68892731, ..., 0.62669821,
+         0.28354695, 0.63785965]],
+
+       [[0.11784489, 0.27841905, 0.86564685, ..., 0.93935605,
+         0.57069434, 0.87304802],
+        [0.27614432, 0.05458362, 0.20360945, ..., 0.59174349,
+         0.27716257, 0.62411018],
+        [0.26398572, 0.8130729 , 0.11523605, ..., 0.50230037,
+         0.55251583, 0.43443558],
+        [0.4158952 , 0.95302152, 0.91040658, ..., 0.83558555,
+         0.4134908 , 0.95575555],
+        [0.35729684, 0.82486333, 0.71743575, ..., 0.83589958,
+         0.64293541, 0.07556001]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+    y        (trials) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+    z        (trials) int64 0 0 0 0 0 1 1 1 1 1
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 1 1 1 1 1 1 1 1 1 1
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       float
+    z_dtype:       int
+    mi_type:       ccd
+    mi_repr:       I(x; y (continuous)) | z (discret)
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_2&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.91948695, 0.87979538, 0.79281291, ..., 0.82263166,
+         0.92349852, 0.64741517],
+        [0.74029803, 0.68089148, 0.23847544, ..., 0.96049495,
+         0.91139698, 0.0852222 ],
+        [0.06195706, 0.50751781, 0.02717379, ..., 0.96101482,
+         0.67725388, 0.98765984],
+        [0.27896102, 0.34642859, 0.12684912, ..., 0.78485668,
+         0.36077026, 0.23479245],
+        [0.78552317, 0.1281671 , 0.80580504, ..., 0.61991236,
+         0.08161449, 0.07320001]],
+
+       [[0.29114134, 0.26134147, 0.68072373, ..., 0.79293835,
+         0.76346626, 0.6600864 ],
+        [0.2380412 , 0.55981534, 0.82065207, ..., 0.63367644,
+         0.10015319, 0.35899084],
+        [0.37397522, 0.83304634, 0.52126711, ..., 0.20324482,
+         0.37542584, 0.997347  ],
+        [0.83454822, 0.16800315, 0.64732877, ..., 0.18370469,
+         0.0258599 , 0.4788021 ],
+        [0.61807283, 0.6953434 , 0.30728251, ..., 0.19432944,
+...
+         0.9224637 , 0.63125157],
+        [0.55708516, 0.87784986, 0.37966677, ..., 0.9632567 ,
+         0.21915866, 0.00457697],
+        [0.49752683, 0.17981057, 0.57013578, ..., 0.45255511,
+         0.725804  , 0.1114034 ],
+        [0.83133338, 0.09896551, 0.11999966, ..., 0.28314694,
+         0.58339661, 0.33079066],
+        [0.11909597, 0.34758649, 0.10550889, ..., 0.97560088,
+         0.5777897 , 0.42748875]],
+
+       [[0.03267569, 0.61950707, 0.64991809, ..., 0.71811551,
+         0.3099583 , 0.52742885],
+        [0.11269014, 0.44404203, 0.07050745, ..., 0.73059958,
+         0.21967989, 0.03593816],
+        [0.64056715, 0.26810605, 0.19728428, ..., 0.77406934,
+         0.8526119 , 0.90081977],
+        [0.77515231, 0.86759694, 0.63609906, ..., 0.79314501,
+         0.9176867 , 0.37723888],
+        [0.31401674, 0.41066661, 0.4381768 , ..., 0.41852247,
+         0.31735248, 0.79469672]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+    y        (trials) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+    z        (trials) int64 0 0 0 0 0 1 1 1 1 1
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 2 2 2 2 2 2 2 2 2 2
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       float
+    z_dtype:       int
+    mi_type:       ccd
+    mi_repr:       I(x; y (continuous)) | z (discret)
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_3&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.43004538, 0.65614089, 0.13284507, ..., 0.16816806,
+         0.33979741, 0.37546796],
+        [0.70255806, 0.78549951, 0.08647421, ..., 0.36036255,
+         0.00245529, 0.55037426],
+        [0.50360901, 0.84320302, 0.69687019, ..., 0.08969652,
+         0.95284688, 0.39686039],
+        [0.18588025, 0.25937333, 0.22517591, ..., 0.08456359,
+         0.29593196, 0.97353069],
+        [0.64624918, 0.05814698, 0.21607716, ..., 0.70918007,
+         0.76225478, 0.66491777]],
+
+       [[0.46265872, 0.35913096, 0.16493715, ..., 0.84188051,
+         0.93837826, 0.86643623],
+        [0.95134456, 0.09031157, 0.75450837, ..., 0.06485132,
+         0.2687475 , 0.96743844],
+        [0.17654793, 0.44472352, 0.91355439, ..., 0.58816824,
+         0.02522253, 0.28955094],
+        [0.7819593 , 0.7743504 , 0.94428168, ..., 0.77961091,
+         0.65580837, 0.55473179],
+        [0.63224248, 0.40365546, 0.74860973, ..., 0.75569197,
+...
+         0.34429112, 0.02805752],
+        [0.7131015 , 0.04315035, 0.87821316, ..., 0.61443466,
+         0.81192817, 0.54860817],
+        [0.79701442, 0.70784575, 0.36757337, ..., 0.91409791,
+         0.00200909, 0.71946715],
+        [0.37660624, 0.60205987, 0.90814293, ..., 0.87080868,
+         0.1424463 , 0.90913818],
+        [0.94780456, 0.63795864, 0.14539284, ..., 0.53113956,
+         0.82708304, 0.8529294 ]],
+
+       [[0.57654435, 0.03810384, 0.86381878, ..., 0.58978081,
+         0.50967147, 0.62782527],
+        [0.40155199, 0.88181222, 0.09689691, ..., 0.81137492,
+         0.37524963, 0.91177733],
+        [0.4087309 , 0.98467908, 0.94713449, ..., 0.68061051,
+         0.6589184 , 0.03143535],
+        [0.58335109, 0.61492765, 0.72611378, ..., 0.52935148,
+         0.67717479, 0.08073243],
+        [0.4694373 , 0.71561275, 0.29705791, ..., 0.51541419,
+         0.2558448 , 0.17006528]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+    y        (trials) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+    z        (trials) int64 0 0 0 0 0 1 1 1 1 1
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 3 3 3 3 3 3 3 3 3 3
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       float
+    z_dtype:       int
+    mi_type:       ccd
+    mi_repr:       I(x; y (continuous)) | z (discret)
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+&lt;xarray.DataArray &#39;subject_4&#39; (trials: 10, roi: 5, times: 100)&gt;
+array([[[0.81060687, 0.06395865, 0.93834251, ..., 0.38458425,
+         0.33503571, 0.35213913],
+        [0.9728364 , 0.22333399, 0.51167532, ..., 0.23949269,
+         0.12319338, 0.67722901],
+        [0.65227237, 0.63854027, 0.20061244, ..., 0.32318281,
+         0.96644307, 0.37664041],
+        [0.25948739, 0.00694006, 0.29042107, ..., 0.78536757,
+         0.37503725, 0.72966275],
+        [0.32831335, 0.71420023, 0.89184502, ..., 0.2454904 ,
+         0.04527967, 0.35549081]],
+
+       [[0.67116019, 0.88330395, 0.79450572, ..., 0.67184612,
+         0.05460093, 0.14406935],
+        [0.38628614, 0.42851805, 0.74168145, ..., 0.08240887,
+         0.9857575 , 0.77432535],
+        [0.14615664, 0.37525907, 0.46117555, ..., 0.85307356,
+         0.85050297, 0.34925627],
+        [0.30121031, 0.92883483, 0.04915563, ..., 0.94363192,
+         0.83600807, 0.97264693],
+        [0.61594377, 0.56711937, 0.07108376, ..., 0.32221322,
+...
+         0.40183786, 0.17538522],
+        [0.79461588, 0.94227847, 0.24801076, ..., 0.74271852,
+         0.52351185, 0.31655994],
+        [0.51511617, 0.16578703, 0.51492142, ..., 0.65666036,
+         0.51381209, 0.21136769],
+        [0.62106923, 0.90611925, 0.58828558, ..., 0.56307889,
+         0.6740868 , 0.49002678],
+        [0.10904393, 0.19411827, 0.21737293, ..., 0.13419232,
+         0.62989886, 0.19977215]],
+
+       [[0.52818457, 0.61406642, 0.48828433, ..., 0.99444816,
+         0.40827414, 0.95696391],
+        [0.94988824, 0.86420457, 0.64538879, ..., 0.59625007,
+         0.10451909, 0.97635364],
+        [0.48001973, 0.03687578, 0.80113744, ..., 0.98693827,
+         0.80515945, 0.2371893 ],
+        [0.98858328, 0.8495341 , 0.486449  , ..., 0.54092701,
+         0.9243252 , 0.06330291],
+        [0.66754356, 0.48554682, 0.72044128, ..., 0.31882968,
+         0.90538804, 0.72165753]]])
+Coordinates:
+  * trials   (trials) int64 0 1 2 3 4 5 6 7 8 9
+    y        (trials) float64 0.3657 -0.9241 -0.7556 ... 0.4543 0.3517 -0.8852
+    z        (trials) int64 0 0 0 0 0 1 1 1 1 1
+  * roi      (roi) &lt;U4 &#39;ch_0&#39; &#39;ch_1&#39; &#39;ch_2&#39; &#39;ch_3&#39; &#39;ch_4&#39;
+    agg_ch   (roi) int64 0 0 0 0 0
+  * times    (times) float64 0.0 0.001953 0.003906 ... 0.1895 0.1914 0.1934
+    subject  (trials) int64 4 4 4 4 4 4 4 4 4 4
+Attributes:
+    __version__:   0.4.5
+    modality:      electrophysiology
+    dtype:         SubjectEphy
+    y_dtype:       float
+    z_dtype:       int
+    mi_type:       ccd
+    mi_repr:       I(x; y (continuous)) | z (discret)
+    sfreq:         512.0
+    agg_ch:        1
+    multivariate:  0
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.370 seconds)</p>
+<p><strong>Estimated memory usage:</strong>  395 MB</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-dataset-plot-dataset-xarray-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c9ee9d1b34e24156df644db7f70c9e6b/plot_dataset_xarray.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_dataset_xarray.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/9a005eb1fa12814043ca3f5d7ba8ead9/plot_dataset_xarray.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_dataset_xarray.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/6ab0ca798470c084794fe69848c70d9f/plot_dataset_xarray.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_dataset_xarray.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_dataset_ephy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Build an electrophysiological dataset</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../mi/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Group-level statistics on measures of information</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-artificial-data">Create artificial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-conversion-to-dataarray">Xarray conversion to DataArray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-dataset">Build the dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiindex-support">MultiIndex support</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

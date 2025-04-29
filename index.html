@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Frites &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview" href="overview/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="overview/index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><div class="card d-none d-md-block mt-4">
+    <h5 class="card-header font-weight-bold">Version 0.4.5</h5>
+    <div class="card-body">
+        <ul class="list-group list-group-flush list-unstyled quicklinks">
+            <li><a href="auto_examples/index.html"><i class="text-muted fas fa-book fa-fw"></i> Examples</a></li>
+            <li><a href="overview/ovw_whatsnew.html"><i class="text-muted fas fa-newspaper fa-fw"></i> Changelog</a></li>
+            <li><a href="overview/ovw_help.html"><i class="text-muted fas fa-question-circle fa-fw"></i> Report, contribute and get help</a></li>
+<!--             <li><a href="overview/cite.html"><i class="text-muted fas fa-quote-left fa-fw"></i> Cite</a></li>
+            <li><a href="install/contributing.html"><i class="text-muted fas fa-code-branch fa-fw"></i> Contribute</a></li> -->
+        </ul>
+    </div>
+</div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="frites">
+<h1>Frites<a class="headerlink" href="#frites" title="Permalink to this heading">#</a></h1>
+<a class="reference external image-reference" href="https://github.com/brainets/frites/actions/workflows/test_doc.yml"><img alt="https://github.com/brainets/frites/actions/workflows/test_doc.yml/badge.svg" src="https://github.com/brainets/frites/actions/workflows/test_doc.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/brainets/frites/actions/workflows/flake.yml"><img alt="https://github.com/brainets/frites/actions/workflows/flake.yml/badge.svg" src="https://github.com/brainets/frites/actions/workflows/flake.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/brainets/frites"><img alt="https://travis-ci.org/brainets/frites.svg?branch=master" src="https://travis-ci.org/brainets/frites.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/brainets/frites"><img alt="https://codecov.io/gh/brainets/frites/branch/master/graph/badge.svg" src="https://codecov.io/gh/brainets/frites/branch/master/graph/badge.svg" /></a>
+<a class="reference external image-reference" href="https://badge.fury.io/py/frites"><img alt="https://badge.fury.io/py/frites.svg" src="https://badge.fury.io/py/frites.svg" /></a>
+<a class="reference external image-reference" href="https://pepy.tech/project/frites"><img alt="https://pepy.tech/badge/frites" src="https://pepy.tech/badge/frites" /></a>
+<a class="reference external image-reference" href="https://zenodo.org/badge/latestdoi/213869364"><img alt="https://zenodo.org/badge/213869364.svg" src="https://zenodo.org/badge/213869364.svg" /></a>
+<a class="reference external image-reference" href="https://joss.theoj.org/papers/437a7362501b2ea984e1d4fed4646076"><img alt="https://joss.theoj.org/papers/437a7362501b2ea984e1d4fed4646076/status.svg" src="https://joss.theoj.org/papers/437a7362501b2ea984e1d4fed4646076/status.svg" /></a>
+<figure class="align-center">
+<img alt="_images/logo_desc.png" src="_images/logo_desc.png" />
+</figure>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h2>
+<p><strong>Frites</strong> is a Python toolbox designed for students and researchers for assessing information-based measures on human and animal neurophysiological data (M/EEG, Intracranial) for the discovery of cognitive brain networks. The toolbox also includes directed and undirected connectivity metrics such as group-level statistics on measures of information (information-theory, machine-learning and measures of distance). <strong>Frites</strong> also contains workflows accessible to users with little programming knowledge.</p>
+</section>
+<section id="what-can-you-do-with-frites">
+<h2>What can you do with Frites?<a class="headerlink" href="#what-can-you-do-with-frites" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Frites can extract task-related cognitive brain networks, that is brain regions and connectivity between brain regions that are modulated according to the task (<a class="reference external" href="https://brainets.github.io/frites/overview/ovw_goals.html#">overview</a>)</p></li>
+<li><p>Frites can assess information-based measures on neurophysiological data (<a class="reference external" href="https://brainets.github.io/frites/overview/ovw_methods.html#data-analysis-within-the-information-theoretical-framework">overview</a>) using a large panel of estimators (<a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#group-level-statistics-on-measures-of-information">examples</a>)</p></li>
+<li><p>Frites can be used to assess Dynamic Functional Connectivity using mutual information and directional measures using Granger causality (<a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#connectivity-and-information-transfer">examples</a>)</p></li>
+<li><p>Frites can perform statistical inference on measures of information, such as measures from information-theory, machine-learning or measures of distances, using permutation-based tests (<a class="reference external" href="https://brainets.github.io/frites/overview/ovw_methods.html#statistical-analyses">overview</a> and <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#group-level-statistics-on-measures-of-information">examples</a>) and controlling for multiple comparisons (<a class="reference external" href="https://brainets.github.io/frites/overview/ovw_methods.html#correction-for-multiple-comparisons">overview</a>)</p></li>
+<li><p>Frites provides simples WorkFlows to analyse and organise your datasets (<a class="reference external" href="https://brainets.github.io/frites/overview/ovw_frites.html#start-analyzing-your-data-with-frites">overview</a> and <a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#multi-subjects-dataset">examples</a>) and simple tutorials (<a class="reference external" href="https://brainets.github.io/frites/auto_examples/index.html#tutorials">examples</a>)</p></li>
+</ol>
+</section>
+<section id="highlights">
+<h2>Highlights<a class="headerlink" href="#highlights" title="Permalink to this heading">#</a></h2>
+<div class="sphinx-bs container-lg pb-1 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text">Measures of information</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">Extract cognitive brain networks by linking brain data to an external task
+variable by means of powerful, potentially multivariate, measures of
+information from fields like <a class="reference external" href="https://brainets.github.io/frites/api/api_estimators.html#information-theoretic-estimators">information theory</a>, machine-learning,
+<a class="reference external" href="https://brainets.github.io/frites/api/api_estimators.html#distance-estimators">measures of distances</a>
+or by defining your own <a class="reference external" href="https://brainets.github.io/frites/api/generated/frites.estimator.CustomEstimator.html#frites.estimator.CustomEstimator">custom estimator</a>.</p>
+</div>
+<div class="card-footer docutils">
+<p class="card-text"><a class="sphinx-bs btn text-wrap btn-outline-primary btn-block reference external" href="https://brainets.github.io/frites/api/api_estimators.html"><span>List of estimators</span></a></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text">Group-level statistics</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">Combine measures of information with group-level statistics to extract
+robust effects across a population of subjects or sessions. Use either fully
+automatized non-parametric permutation-based <a class="reference external" href="https://brainets.github.io/frites/api/generated/frites.workflow.WfMi.html">workflows</a> or <a class="reference external" href="https://brainets.github.io/frites/api/generated/frites.workflow.WfStats.html">manual ones</a></p>
+</div>
+<div class="card-footer docutils">
+<p class="card-text"><a class="sphinx-bs btn text-wrap btn-outline-primary btn-block reference external" href="https://brainets.github.io/frites/api/api_workflow.html"><span>List of workflows</span></a></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text">Measures of connectivity</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">Estimate whole-brain pairwise undirected and directed connectivity.</p>
+</div>
+<div class="card-footer docutils">
+<p class="card-text"><a class="sphinx-bs btn text-wrap btn-outline-primary btn-block stretched-link reference external" href="https://brainets.github.io/frites/api/api_connectivity.html"><span>Connectivity metrics</span></a></p>
+</div>
+</div>
+</div>
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-header text-center docutils">
+<p class="card-text">Link with external toolboxes</p>
+</div>
+<div class="card-body docutils">
+<p class="card-text">Frites supports inputs from standard libraries like <a class="reference external" href="https://numpy.org/">Numpy</a>,
+<a class="reference external" href="https://mne.tools/stable/index.html">MNE Python</a> or more recent ones like
+labelled <a class="reference external" href="http://xarray.pydata.org/en/stable/">Xarray</a> objects.</p>
+</div>
+<div class="card-footer docutils">
+<p class="card-text"><a class="sphinx-bs btn text-wrap btn-outline-primary btn-block reference external" href="https://brainets.github.io/frites/auto_examples/index.html#xarray"><span>Xarray quick tour</span></a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="overview/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-you-do-with-frites">What can you do with Frites?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#highlights">Highlights</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>References &#8212; frites 0.4.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/frites_style.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overview/ovw_refs';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What’s new" href="ovw_whatsnew.html" />
+    <link rel="prev" title="Acknowledgments" href="ovw_acknowledgments.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Roboto+Mono:wght@332&display=swap');
+</style>
+</head>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/frites_top.png" class="logo__image only-light" alt="frites 0.4.5 documentation - Home"/>
+    <script>document.write(`<img src="../_static/frites_top.png" class="logo__image only-dark" alt="frites 0.4.5 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Overview
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../auto_examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/brainets/frites" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/kNearNeighbors" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ovw_goals.html">Goals of Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_methods.html">Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_frites.html">Start analyzing your data with Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_perf.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_help.html">Report, contribute and get help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_cite.html">Cite Frites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_community.html">Community</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_acknowledgments.html">Acknowledgments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ovw_whatsnew.html">What’s new</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Overview</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">References</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<p id="bibtex-bibliography-overview/ovw_refs-0"><div class="citation bibtex" id="brovelli2015characterization" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Andrea Brovelli, Daniel Chicharro, Jean-Michel Badier, Huifang Wang, and Viktor Jirsa. Characterization of cortical networks and corticocortical functional connectivity mediating arbitrary visuomotor mapping. <em>Journal of Neuroscience</em>, 35(37):12643–12658, 2015.</p>
+</div>
+<div class="citation bibtex" id="cao-multiple-2014" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Jing Cao and Song Zhang. Multiple Comparison Procedures. <em>JAMA</em>, 312(5):543–544, August 2014. URL: <a class="reference external" href="https://jamanetwork-com.lama.univ-amu.fr/journals/jama/fullarticle/1892228">https://jamanetwork-com.lama.univ-amu.fr/journals/jama/fullarticle/1892228</a> (visited on 2020-01-14), <a class="reference external" href="https://doi.org/10.1001/jama.2014.9440">doi:10.1001/jama.2014.9440</a>.</p>
+</div>
+<div class="citation bibtex" id="celotto2023information" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p>Marco Celotto, Jan Bim, Alejandro Tlaie, Vito De Feo, Stefan M Lemke, Daniel Chicharro, Hamed Nili, Malte Bieler, Ileana Hanganu-Opatz, Tobias H Donner, and others. An information-theoretic quantification of the content of communication between brain regions. <em>bioRxiv</em>, pages 2023–06, 2023.</p>
+</div>
+<div class="citation bibtex" id="combrisson-group-level-2022" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<p>Etienne Combrisson, Michele Allegra, Ruggero Basanisi, Robin A. A. Ince, Bruno L. Giordano, Julien Bastin, and Andrea Brovelli. Group-level inference of information-based measures for the analyses of cognitive brain networks from neurophysiological data. <em>NeuroImage</em>, 258:119347, September 2022. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S1053811922004669">https://www.sciencedirect.com/science/article/pii/S1053811922004669</a> (visited on 2022-06-30), <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2022.119347">doi:10.1016/j.neuroimage.2022.119347</a>.</p>
+</div>
+<div class="citation bibtex" id="combrisson-exceeding-2015" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></span>
+<p>Etienne Combrisson and Karim Jerbi. Exceeding chance level by chance: The caveat of theoretical chance levels in brain signal classification and statistical assessment of decoding accuracy. <em>Journal of Neuroscience Methods</em>, 250:126–136, July 2015. URL: <a class="reference external" href="http://linkinghub.elsevier.com/retrieve/pii/S0165027015000114">http://linkinghub.elsevier.com/retrieve/pii/S0165027015000114</a> (visited on 2016-02-23), <a class="reference external" href="https://doi.org/10.1016/j.jneumeth.2015.01.010">doi:10.1016/j.jneumeth.2015.01.010</a>.</p>
+</div>
+<div class="citation bibtex" id="deco2021revisiting" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
+<p>Gustavo Deco, Diego Vidaurre, and Morten L Kringelbach. Revisiting the global workspace orchestrating the hierarchical organization of the human brain. <em>Nature human behaviour</em>, 5(4):497–511, 2021.</p>
+</div>
+<div class="citation bibtex" id="ding2006granger" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
+<p>Mingzhou Ding, Yonghong Chen, and SL Bressler. Granger causality: basic theory and application to neuroscience. 2006. <em>Handbook of Time Series Analysis [Internet]. Wiley, Wienheim</em>, 2006.</p>
+</div>
+<div class="citation bibtex" id="friston1996detecting" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></span>
+<p>Karl J Friston, Andrew Holmes, Jean-Baptiste Poline, Cathy J Price, and Christopher D Frith. Detecting activations in pet and fmri: levels of inference and power. <em>Neuroimage</em>, 4(3):223–235, 1996.</p>
+</div>
+<div class="citation bibtex" id="friston1999many" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></span>
+<p>Karl J Friston, Andrew P Holmes, and Keith J Worsley. How many subjects constitute a study? 1999.</p>
+</div>
+<div class="citation bibtex" id="friston-detecting-1996" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></span>
+<p>Karl J. Friston, A. Holmes, JB Poline, CJ Price, and CD Frith. Detecting Activations in PET and fMRI: Levels of Inference and Power. <em>NEUROIMAGE</em>, 40:223–235, 1996.</p>
+</div>
+<div class="citation bibtex" id="giordano2017contributions" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></span>
+<p>Bruno L Giordano, Robin AA Ince, Joachim Gross, Philippe G Schyns, Stefano Panzeri, and Christoph Kayser. Contributions of local speech encoding and functional connectivity to audio-visual speech perception. <em>Elife</em>, 6:e24763, 2017.</p>
+</div>
+<div class="citation bibtex" id="ince2017statistical" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></span>
+<p>Robin AA Ince, Bruno L Giordano, Christoph Kayser, Guillaume A Rousselet, Joachim Gross, and Philippe G Schyns. A statistical framework for neuroimaging data analysis based on mutual information estimated via a gaussian copula. <em>Human brain mapping</em>, 38(3):1541–1573, 2017.</p>
+</div>
+<div class="citation bibtex" id="maris2007nonparametric" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></span>
+<p>Eric Maris and Robert Oostenveld. Nonparametric statistical testing of eeg-and meg-data. <em>Journal of neuroscience methods</em>, 164(1):177–190, 2007.</p>
+</div>
+<div class="citation bibtex" id="mcgill1954" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
+<p>W. McGill. Multivariate information transmission. <em>Transactions of the IRE Professional Group on Information Theory</em>, 4(4):93–111, September 1954. Conference Name: Transactions of the IRE Professional Group on Information Theory. <a class="reference external" href="https://doi.org/10.1109/TIT.1954.1057469">doi:10.1109/TIT.1954.1057469</a>.</p>
+</div>
+<div class="citation bibtex" id="nichols-nonparametric-2002" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>15<span class="fn-bracket">]</span></span>
+<p>Thomas E. Nichols and Andrew P. Holmes. Nonparametric permutation tests for functional neuroimaging: A primer with examples. <em>Human Brain Mapping</em>, 15(1):1–25, January 2002. URL: <a class="reference external" href="http://doi.wiley.com/10.1002/hbm.1058">http://doi.wiley.com/10.1002/hbm.1058</a> (visited on 2019-10-02), <a class="reference external" href="https://doi.org/10.1002/hbm.1058">doi:10.1002/hbm.1058</a>.</p>
+</div>
+<div class="citation bibtex" id="ridgway2012problem" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>16<span class="fn-bracket">]</span></span>
+<p>Gerard R Ridgway, Vladimir Litvak, Guillaume Flandin, Karl J Friston, and Will D Penny. The problem of low variance voxels in statistical parametric mapping; a new hat avoids a ‘haircut’. <em>Neuroimage</em>, 59(3):2131–2141, 2012.</p>
+</div>
+<div class="citation bibtex" id="sassenhagen2019cluster" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>17<span class="fn-bracket">]</span></span>
+<p>Jona Sassenhagen and Dejan Draschkow. Cluster-based permutation tests of meg/eeg data do not establish significance of effect latency or location. <em>Psychophysiology</em>, 56(6):e13335, 2019.</p>
+</div>
+<div class="citation bibtex" id="smith2009threshold" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></span>
+<p>Stephen M Smith and Thomas E Nichols. Threshold-free cluster enhancement: addressing problems of smoothing, threshold dependence and localisation in cluster inference. <em>Neuroimage</em>, 44(1):83–98, 2009.</p>
+</div>
+<div class="citation bibtex" id="timme-tutorial-2018" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>19<span class="fn-bracket">]</span></span>
+<p>Nicholas M. Timme and Christopher Lapish. A Tutorial for Information Theory in Neuroscience. <em>eNeuro</em>, September 2018. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6131830/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6131830/</a> (visited on 2019-11-20), <a class="reference external" href="https://doi.org/10.1523/ENEURO.0052-18.2018">doi:10.1523/ENEURO.0052-18.2018</a>.</p>
+</div>
+<div class="citation bibtex" id="wilcox-guide-2017" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></span>
+<p>Rand R. Wilcox and Guillaume A. Rousselet. A Guide to Robust Statistical Methods in Neuroscience. <em>bioRxiv</em>, June 2017. URL: <a class="reference external" href="http://biorxiv.org/lookup/doi/10.1101/151811">http://biorxiv.org/lookup/doi/10.1101/151811</a> (visited on 2019-09-25), <a class="reference external" href="https://doi.org/10.1101/151811">doi:10.1101/151811</a>.</p>
+</div>
+<div class="citation bibtex" id="williamsbeers2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></span>
+<p>Paul L. Williams and Randall D. Beer. Nonnegative Decomposition of Multivariate Information. <em>arXiv:1004.2515 [math-ph, physics:physics, q-bio]</em>, April 2010. arXiv: 1004.2515. URL: <a class="reference external" href="http://arxiv.org/abs/1004.2515">http://arxiv.org/abs/1004.2515</a> (visited on 2019-05-02).</p>
+</div>
+</div>
+</p>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ovw_acknowledgments.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Acknowledgments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ovw_whatsnew.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">What’s new</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <!-- <br> -->
+        <p>&copy; Copyright Last updated on 2025-04-29.</p>
+    </footer>
+
+  </body>
+</html>
